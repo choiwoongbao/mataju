@@ -915,13 +915,4 @@ input::placeholder {
     display: none;
   }
 }
-
-
-
-
-
-
-
-
-
 </style>

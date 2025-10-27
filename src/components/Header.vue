@@ -2,7 +2,7 @@
 <template>
   <nav class="jb-nav" :class="{ 'is-open': isOpen }">
     <!-- Left: Logo -->
-    <router-link to="/" class="logo" aria-label="홈으로 이동">짐보따리</router-link>
+    <router-link to="/" class="logo" aria-label="홈으로 이동">마타주</router-link>
 
     <!-- Desktop Menu -->
     <div class="menu">

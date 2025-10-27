@@ -320,6 +320,7 @@ const Calendar = defineComponent({
   align-items: center;
   grid-template-columns: 1.05fr 0.9fr 0.95fr auto;
   position: relative;
+  top: 100px;
   overflow: visible;
   z-index: 10;
 }
@@ -891,6 +892,7 @@ input::placeholder {
   grid-template-columns: 0.7fr 0.6fr 0.7fr auto;
   }
 }
+// ====================================
 @media (max-width: 850px) {
    .search-dock {
     top: 310px;

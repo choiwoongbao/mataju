@@ -7,8 +7,9 @@ import Reservation from "@/views/Reservation.vue";
 import ReserveForm from "@/components/reserv/ReserveForm.vue";
 import Reser_check from "@/views/booking/Reser_check.vue";
 import Complete from "@/views/booking/Complete.vue";
+import Reservation2 from "@/views/Reservation2.vue";
+import Reservation3 from "@/views/Reservation3.vue";
 
-import Reservation2 from "@/views/Reservation_ui.vue";
 import Promotion from "@/views/Promotion.vue";
 import Community from "@/views/Community.vue";
 import Community2 from "@/views/Community2.vue";
@@ -28,8 +29,9 @@ const routes = [
   { path: "/reserve", component: ReserveForm},
   {path: "/check", component:Reser_check},
   {path: "/complete", component: Complete},
-
   { path: "/reservation2", component: Reservation2 },
+  { path: "/reservation3", component: Reservation3 },
+
   { path: "/community", component: Community },
   { path: "/community2", component: Community2 },
   { path: "/login", component: Login },

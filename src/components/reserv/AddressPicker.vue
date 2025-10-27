@@ -1,4 +1,5 @@
 <template>
+  <h1>AddressPicker</h1>
   <div
     v-if="open"
     class="addr-modal"

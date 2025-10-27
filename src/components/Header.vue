@@ -17,8 +17,9 @@
       <router-link class="dropdown"
         >예약하기
         <ul class="submenu">
-          <li><router-link to="/reservation">이용방법</router-link></li>
-          <li><router-link to="/reservation2">요금안내</router-link></li>
+          <li><router-link to="/reservation">예약하기</router-link></li>
+          <li><router-link to="/reservation2">예약2 결제창</router-link></li>
+          <li><router-link to="/reservation3">예약3 결과창</router-link></li>
         </ul>
       </router-link>
 
@@ -113,7 +114,7 @@
             <transition name="acc">
               <div class="sublist" v-show="section.reserve">
                 <router-link to="/reservation" @click="close()">예약</router-link>
-                <router-link to="/delivery" @click="close()">배송</router-link>
+                <router-link to="/reservation" @click="close()">배송</router-link>
               </div>
             </transition>
           </li>

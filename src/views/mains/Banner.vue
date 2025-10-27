@@ -194,7 +194,7 @@ import { Autoplay, Navigation } from "swiper/modules";
     height: 28px;
   }
   :deep(.swiper-button-prev) {
-    left: 16px;
+    left: 16.1px;
   }
   :deep(.swiper-button-next) {
     right: 16px;

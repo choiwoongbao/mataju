@@ -1,9 +1,6 @@
 <template>
   <div class="wrap">
     <Stepper :current-step="1" />
-
-    <h1>ReserveForm</h1>
-
     <div class="background inner ">
       <div class="container ">
         <!-- 왼쪽 입력 카드 -->
@@ -209,13 +206,11 @@ const handleSubmit = () => {
 </script>
 
 <style scoped lang="scss">
-/* =========================================================
-  Layout: .wrap → .inner → .container (left + right)
-  Components: .form_card, .summary_card
-  Utility: fade transition
-========================================================= */
 
-/* ==========  Layout ========== */
+.inner{
+  max-width: 1120px;
+  margin: auto;
+}
 .wrap {
   background: #f5f7f7;
   padding: 80px 0;
@@ -226,7 +221,7 @@ const handleSubmit = () => {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 40px;
-    width: 90%;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
     align-items: flex-start;
@@ -276,6 +271,7 @@ const handleSubmit = () => {
   }
 
   .card_header {
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -365,10 +361,10 @@ const handleSubmit = () => {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 40px 40px 30px;
+  padding: 30px 40px;
   border: 1px solid transparent;
   position: relative;
-  transition: all 0.3s ease;
+  // transition: all 0.3s ease;
 
   &::before {
     content: "";
@@ -386,7 +382,7 @@ const handleSubmit = () => {
     font-size: 18px;
     font-weight: 600;
     color: #222;
-    margin: 12px 0 20px;
+   margin-bottom: 20px;
   }
 
   table {

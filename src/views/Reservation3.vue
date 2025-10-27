@@ -1,63 +1,63 @@
 <template>
-   <Stepper :current-step="3" />
-  <h1>reservation3</h1>
-
   <!-- ✅ 결제완료 (고정형 카드 UI 단독) -->
-  <div class="card-test">
-    <div class="form_card receipt_card">
-      <div class="card_header">
-        <h3>결제 완료</h3>
-      </div>
+  <section class="reserve-page">
+    <div class="inner">
+      <Stepper :current-step="3" />
 
-      <div class="card_content">
+      <div class="card-test">
+        <div class="form_card receipt_card">
+          <div class="card_header">
+            <h3>결제 완료</h3>
+          </div>
 
-        <table class="receipt_table">
-          <tbody>
+          <div class="card_content">
+            <table class="receipt_table">
+              <tbody>
+                <tr><td>상품명</td><td>사물함 대여</td></tr>
+                <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
+                <tr><td>쿠폰 할인</td><td>- 3,000원</td></tr>
+                <tr><td>포인트 사용</td><td>- 2,500원</td></tr>
+                <tr class="total">
+                  <td>최종 결제 금액</td>
+                  <td><strong>23,500원</strong></td>
+                </tr>
+              </tbody>
+            </table>
 
-            <tr><td>상품명</td><td>사물함 대여</td></tr>
-            <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
-            <tr><td>쿠폰 할인</td><td>- 3,000원</td></tr>
-            <tr><td>포인트 사용</td><td>- 2,500원</td></tr>
-            <tr class="total">
-              <td>최종 결제 금액</td>
-              <td><strong>23,500원</strong></td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="receipt_footer">
+              <p>주문번호 : 2025-1023-001</p>
+              <p>결제일시 : 2025.10.23 14:32</p>
+            </div>
+          </div>
 
-        <div class="receipt_footer">
-          <p>주문번호 : 2025-1023-001</p>
-          <p>결제일시 : 2025.10.23 14:32</p>
+          <div class="card_header">
+            <h3>예약 완료</h3>
+          </div>
+
+          <div class="card_content">
+            <table class="receipt_table">
+              <tbody>
+                <tr><td>상품명</td><td>사물함 대여</td></tr>
+                <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
+                <tr><td>쿠폰 할인</td><td>- 3,000원</td></tr>
+                <tr><td>포인트 사용</td><td>- 2,500원</td></tr>
+                <tr class="total">
+                  <td>최종 결제 금액</td>
+                  <td><strong>23,500원</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="card_header">
-        <h3>예약 완료</h3>
-      </div>
-
-      <div class="card_content">
-
-        <table class="receipt_table">
-          <tbody>
-
-            <tr><td>상품명</td><td>사물함 대여</td></tr>
-            <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
-            <tr><td>쿠폰 할인</td><td>- 3,000원</td></tr>
-            <tr><td>포인트 사용</td><td>- 2,500원</td></tr>
-            <tr class="total">
-              <td>최종 결제 금액</td>
-              <td><strong>23,500원</strong></td>
-            </tr>
-          </tbody>
-        </table>
-
 
         <button class="submit_btn">홈으로 이동</button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
-<script setup>
+    <script setup>
 
+import Stepper from "@/components/reserv/Stepper.vue";
 </script>
 
 <style scoped lang="scss">
@@ -65,10 +65,10 @@
 /*  페이지 배경 (고정) */
 .card-test {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #f5f7f7;
-  padding: 120px 0;
 }
 
 /* 카드 기본 구조 (hover 완전 비활성화 + 이유 주석 포함) */
@@ -79,7 +79,7 @@
   padding: 30px 40px;
   border: 1px solid #fff;      // ✔ 'transparent' 대신 흰색 고정 → hover 시 재렌더링에 의한 색 흔들림 방지
   position: relative;
-  width: 450px;
+  width: 600px;
 
   /* 상단 색상바 (브랜드 컬러) */
   &::before {
@@ -121,24 +121,26 @@
      - 카드와 무관한 요소이므로 버튼 hover는 사용자 피드백용으로 살림
      - 카드 hover와 분리되어 카드 그림자/배경에는 영향 없음
   */
-  .submit_btn {
-    width: 100%;
-    padding: 14px 0;
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    background: #53b4a1;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease; /* 버튼만 부드럽게 */
-
-    &:hover {
-      background: #449b8a;
-    }
-  }
 }
 
+.submit_btn {
+  width: 80%;
+  margin-top: 20px;
+  max-width: 300px;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: #53b4a1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease; /* 버튼만 부드럽게 */
+
+  &:hover {
+    background: #449b8a;
+  }
+}
 /* ✅ 결제완료 카드 (영수증 문구/표 스타일) */
 .receipt_card {
   text-align: center;
@@ -195,4 +197,20 @@
     margin-bottom: 20px;
   }
 }
+/* ✅ 페이지 전체 레이아웃 (reservation2와 통일) */
+.reserve-page {
+  background: #f5f7f7;
+  padding: 5rem 0;
+  min-height: 60rem;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1120px; /* ✅ reservation2와 동일 폭 */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Stepper + 카드 중앙 정렬 */
+}
+
 </style>

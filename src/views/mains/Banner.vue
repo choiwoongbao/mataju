@@ -6,8 +6,7 @@
         :modules="[Autoplay, Navigation]"
         :autoplay="{ delay: 2500, disableOnInteraction: false }"
         :navigation="true"
-        :loop="true"
-      >
+        :loop="true">
         <!-- slide 1 -->
         <swiper-slide>
           <div class="banner-grid">
@@ -37,6 +36,7 @@
         </swiper-slide>
       </swiper>
     </div>
+    <QuickR class="quickr" />
   </section>
 </template>
 
@@ -45,19 +45,33 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
+import QuickR from "./QuickR.vue";
 </script>
 
 <style lang="scss" scoped>
+.banner-outer {
+  position: relative;
+  // z-index: 10;
+}
 /* =========================================================
    1920px 기준 높이 530px 유지 / 비율 고정 반응형
    1000px 이하부터는 세로형 레이아웃 전환
    ========================================================= */
-
+.quickr {
+  position: absolute;
+  left: 50%;
+  bottom: -35px;
+  transform: translatex(-50%);
+  width: calc(100% - 48px);
+  max-width: 1320px;
+  z-index: 20;
+  pointer-events: none;
+}
 /* 배경 */
 .banner-outer {
   width: 100%;
   background: #f6f6f6;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 /* 컨테이너 */
@@ -103,6 +117,7 @@ import { Autoplay, Navigation } from "swiper/modules";
     line-height: 1.2;
   }
   .mb-txt1 {
+    text-align: left;
     font-size: clamp(16px, 1.05vw, 20px);
     color: #028587;
     font-weight: 600;
@@ -112,7 +127,7 @@ import { Autoplay, Navigation } from "swiper/modules";
     font-size: clamp(40px, 3.3vw, 64px);
     font-weight: 800;
     color: #000;
-    line-height: 1.15;
+     line-height: 0.7;
     margin: 0;
     letter-spacing: -0.02em;
   }
@@ -163,6 +178,7 @@ import { Autoplay, Navigation } from "swiper/modules";
     line-height: 1.2;
   }
   .mb-txt1 {
+    text-align: left;
     font-size: 16px;
     color: #028587;
     font-weight: 600;
@@ -172,14 +188,16 @@ import { Autoplay, Navigation } from "swiper/modules";
     font-size: 32px;
     font-weight: 800;
     color: #000;
-    line-height: 1.2;
+    line-height: 0.7;
     margin: 0;
   }
   .mb-txt3 {
     font-size: 14px;
     color: #000;
+    font-weight: 400;
     line-height: 1.25;
     margin: 0;
+        text-align: left;
   }
   .main-banner-img img {
     width: min(85vw, 360px);

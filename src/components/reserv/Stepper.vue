@@ -1,86 +1,64 @@
 <template>
-<h1>Stepper</h1>
-  <!-- 
-위에것 참고해서 진행표시 기능 넣기
-   
-  
-  -->
-  <!-- 
-  <nav class="stepper" aria-label="진행 단계">
-    <ol>
-      <li :class="{ active: currentStep >= 1 }">
-        <span class="dot" aria-hidden="true"></span>
-        <span class="label">사물함 예약</span>
-      </li>
-      <li :class="{ active: currentStep >= 2 }">
-        <span class="connector" aria-hidden="true"></span>
-        <span class="dot" aria-hidden="true"></span>
-        <span class="label">확인 및 결제</span>
-      </li>
-      <li :class="{ active: currentStep >= 3 }">
-        <span class="connector" aria-hidden="true"></span>
-        <span class="dot" aria-hidden="true"></span>
-        <span class="label">완료 확인</span>
-      </li>
-    </ol>
-  </nav> 
-  -->
-  <!-- =========추가===================== -->
-  <!-- 상단 스텝 표시 -->
   <div class="stepper">
     <ol>
-      <li class="step active">
+      <li
+        v-for="(step, i) in steps"
+        :key="i"
+        class="step"
+        :class="{ active: currentStep === i + 1 }"
+        v-show="windowWidth > 768 || currentStep === i + 1"
+      >
         <div class="circle"></div>
-        <p>예약 하기</p>
-        <div class="dotline"></div>
-      </li>
-      <li class="step">
-        <div class="circle"></div>
-        <p>확인 및 결제</p>
-        <div class="dotline"></div>
-      </li>
-      <li class="step">
-        <div class="circle"></div>
-        <p>변경 완료</p>
+        <p>{{ step }}</p>
+        <div v-if="i < steps.length - 1 && windowWidth > 768" class="dotline"></div>
       </li>
     </ol>
   </div>
 </template>
 
 <script setup>
-defineProps({ currentStep: { type: Number, default: 1 } });
+import { ref, onMounted, onUnmounted } from "vue";
+
+defineProps({
+  currentStep: {
+    type: Number,
+    default: 1, // ✅ 기본값: 첫 번째 단계 활성화
+  },
+});
+
+const steps = ["예약 하기", "확인 및 결제", "변경 완료"];
+
+/* ✅ 반응형 감지 */
+const windowWidth = ref(window.innerWidth);
+const handleResize = () => (windowWidth.value = window.innerWidth);
+
+onMounted(() => window.addEventListener("resize", handleResize));
+onUnmounted(() => window.removeEventListener("resize", handleResize));
 </script>
 
 <style lang="scss" scoped>
 @use "/src/assets/style/variables" as *;
-
-/* ✅ 기본 설정 */
-.res-inner {
-  width: 80%;
-  margin: auto;
-  background-color: antiquewhite;
-  font-family: "Inter", "Pretendard", sans-serif;
-  color: #333;
-}
+// body{
+//   // background-color: #f5f7f7;
+// }
 
 /* ✅ 상단 스텝 표시 */
 .stepper {
+  // background-color: #f5f7f7;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
   margin: 3rem auto;
-}
 
-/* ✅ 순서 있는 목록 (ol) */
-.stepper ol {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  ol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 /* ✅ 각 단계 (step) */
@@ -89,40 +67,40 @@ defineProps({ currentStep: { type: Number, default: 1 } });
   flex-direction: column;
   align-items: center;
   position: relative;
+  text-align: center;
   font-size: 16px;
   color: #bbb;
   font-weight: 400;
-  text-align: center;
 
   /* ✅ 원(circle) */
   .circle {
-    width: 20px;
-    height: 20px;
+    position: relative;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 2px solid #bbb;
-    background-color: #fff;
-    margin-bottom: 0.5rem;
+    background-color: #e6e6e6;
+    margin-bottom: 0.6rem;
+    z-index: 2;
+
+    /* ✅ 점선 중앙 정렬 */
+&::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 100%;
+  transform: translateY(-50%);
+  width: calc(clamp(2rem, 5vw, 5rem) +  50px); // ✅ +8px 정도 여유
+  border-top: 2px dotted #bbb;
+  z-index: 1;
+}
   }
 
-  /* ✅ 점선(dotline) */
-  .dotline {
-    position: absolute;
-    top: 50%; /* ✅ 원 중심 기준 */
-    transform: translateY(-50%);
-    right: -50%; /* ✅ 간격 자동 계산 */
-    width: 100%;
-    max-width: 90px;
-    height: 2px;
-    border-top: 2px dotted #bbb;
-    z-index: 0;
-  }
-
-  /* ✅ 마지막 단계 뒤의 선 제거 */
-  &:last-child .dotline {
+  &:last-child .circle::after {
     display: none;
   }
 
-  /* ✅ 활성화 상태 (현재 단계) */
+  /* ✅ 활성화 상태 */
   &.active {
     color: #028587;
     font-weight: 600;
@@ -130,49 +108,37 @@ defineProps({ currentStep: { type: Number, default: 1 } });
     .circle {
       border-color: $color_main_light;
       background-color: $color_main_deep;
-    }
 
-    .dotline {
-      border-top-color: #9fd3cf;
+      &::after {
+        border-top-color: #74d0c8;
+      }
     }
   }
 }
 
-/* ✅ 반응형 (모바일 세로형 Stepper) */
+/* ✅ 모바일(768px 이하) — 점선 & 비활성 단계 숨김 */
 @media (max-width: 768px) {
   .stepper ol {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
   }
 
+  /* 기본적으로 모든 스텝 숨김 */
   .step {
-    flex-direction: row;
+    display: none;
+  }
+
+  /* 현재 활성 스텝만 표시 */
+  .step.active {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: left;
+  }
 
-    /* ✅ 원 */
-    .circle {
-      margin-bottom: 0;
-    }
-
-    /* ✅ 점선 → 세로선 변경 */
-    .dotline {
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 40px;
-      border-top: none;
-      border-left: 2px dotted #bbb;
-    }
-
-    /* ✅ 마지막 점선 제거 */
-    &:last-child .dotline {
-      display: none;
-    }
+  /* 점선 완전 제거 */
+  .dotline,
+  .circle::after {
+    display: none !important;
   }
 }
 </style>

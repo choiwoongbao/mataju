@@ -1,38 +1,17 @@
 <template>
   <div class="search-main">
-    <section
-      class="branch-search"
-      role="search"
-      aria-label="짐보따리 지점 찾기">
+    <section class="branch-search" role="search" aria-label="짐보따리 지점 찾기">
       <div class="inner">
-        <!-- 지도 표시 영역 -->
-        <figure class="illustration" @click="openMapModal">
-          <div v-if="selectedLocation" class="map-container">
-            <div ref="mapEl" class="map"></div>
-            <div class="location-info">
-              <h3>{{ selectedLocation.name }}</h3>
-              <p>{{ selectedLocation.address }}</p>
-              <p class="locker-info">{{ selectedLocation.lockers }}</p>
-            </div>
-            <div class="map-overlay">
-              <span class="click-hint">지도를 클릭하여 자세히 보기</span>
-            </div>
-          </div>
-          <div v-else class="placeholder">
-            <div class="placeholder-icon">📍</div>
-            <p>지점을 선택해보세요</p>
-            <span class="click-hint">지도를 클릭하여 지점 선택</span>
-          </div>
+        <!-- 이미지 표시 영역 -->
+        <figure class="illustration">
+          <img src="/images/search.png" alt="지점 찾기" />
         </figure>
 
         <div class="content">
           <h1 class="title">짐보따리 지점 찾기</h1>
-          <p class="subtitle">
-            근처에 있는 짐보따리 보관소와 무인함 위치를 한눈에 확인할 수
-            있습니다.
-          </p>
+          <p class="subtitle">근처에 있는 짐보따리 보관소와 무인함 위치를 한눈에 확인할 수 있습니다.</p>
 
-          <form class="searchbar" @submit.prevent="selectLocationFromDropdown">
+          <form class="searchbar" @submit.prevent="openMapModal">
             <label class="a11y" for="branchSelect">지점 선택</label>
             <select
               id="branchSelect"
@@ -45,15 +24,11 @@
                 :key="location.id"
                 :value="location.id"
                 :disabled="location.status === '점검중'">
-                {{ location.name }} - {{ location.address }} ({{
-                  location.distance
-                }})
+                {{ location.name }} - {{ location.address }} ({{ location.distance }})
                 <span v-if="location.status === '점검중'"> - 점검중</span>
               </option>
             </select>
-            <button class="cta" type="submit" :disabled="!selectedLocationId">
-              지점 확인하기
-            </button>
+            <button class="cta" type="submit" :disabled="!selectedLocationId">지점 확인하기</button>
           </form>
 
           <!-- 지점 선택 모달 -->
@@ -74,9 +49,7 @@
                       class="result-item"
                       :class="{
                         disabled: location.status === '점검중',
-                        selected:
-                          selectedLocation &&
-                          selectedLocation.id === location.id,
+                        selected: selectedLocation && selectedLocation.id === location.id,
                       }"
                       @click="selectLocationFromModal(location.id)">
                       <div class="result-info">
@@ -85,13 +58,7 @@
                         <p class="locker-info">{{ location.lockers }}</p>
                         <div class="location-meta">
                           <span class="distance">{{ location.distance }}</span>
-                          <span
-                            class="status"
-                            :class="
-                              location.status === '운영중'
-                                ? 'operating'
-                                : 'maintenance'
-                            ">
+                          <span class="status" :class="location.status === '운영중' ? 'operating' : 'maintenance'">
                             {{ location.status }}
                           </span>
                         </div>
@@ -138,16 +105,8 @@
                     <p>{{ selectedLocation.address }}</p>
                     <p>{{ selectedLocation.lockers }}</p>
                     <div class="location-meta">
-                      <span class="distance">{{
-                        selectedLocation.distance
-                      }}</span>
-                      <span
-                        class="status"
-                        :class="
-                          selectedLocation.status === '운영중'
-                            ? 'operating'
-                            : 'maintenance'
-                        ">
+                      <span class="distance">{{ selectedLocation.distance }}</span>
+                      <span class="status" :class="selectedLocation.status === '운영중' ? 'operating' : 'maintenance'">
                         {{ selectedLocation.status }}
                       </span>
                     </div>
@@ -170,7 +129,6 @@ import { ref, onMounted, nextTick } from "vue";
 const selectedLocationId = ref("");
 const showModal = ref(false);
 const selectedLocation = ref(null);
-const mapEl = ref(null);
 const modalMapEl = ref(null);
 
 // 지점 데이터 (실제로는 API에서 가져올 데이터)
@@ -279,18 +237,9 @@ function selectLocationFromDropdown() {
     return;
   }
 
-  const location = locations.find(
-    (loc) => loc.id === parseInt(selectedLocationId.value)
-  );
+  const location = locations.find((loc) => loc.id === parseInt(selectedLocationId.value));
   if (location) {
     selectedLocation.value = location;
-
-    // 메인 지도 업데이트
-    nextTick(() => {
-      if (mapEl.value) {
-        updateMainMap(location);
-      }
-    });
   }
 }
 
@@ -321,9 +270,7 @@ function performSearch() {
   } else {
     // 검색어가 있으면 필터링
     searchResults.value = sampleLocations.filter(
-      (location) =>
-        location.name.toLowerCase().includes(query) ||
-        location.address.toLowerCase().includes(query)
+      (location) => location.name.toLowerCase().includes(query) || location.address.toLowerCase().includes(query)
     );
   }
 
@@ -347,71 +294,10 @@ function selectLocation(location) {
 // 모달 닫기
 function closeModal() {
   showModal.value = false;
-  // 선택한 위치가 있으면 메인 지도 업데이트
+  // 선택한 위치가 있으면 드롭다운 업데이트
   if (selectedLocation.value) {
-    nextTick(() => {
-      if (mapEl.value) {
-        updateMainMap(selectedLocation.value);
-      }
-    });
-    // 메인 드롭다운도 업데이트
     selectedLocationId.value = selectedLocation.value.id;
   }
-}
-
-// 메인 지도 업데이트
-function updateMainMap(location) {
-  if (!mapEl.value) return;
-
-  // 카카오맵이 로드되었는지 확인
-  if (!window.kakao || !window.kakao.maps) {
-    // 카카오맵이 없으면 기본 표시
-    mapEl.value.innerHTML = `
-      <div style="width: 100%; height: 100%; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative;">
-        <div style="position: absolute; top: 10px; left: 10px; background: white; padding: 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-          📍 ${location.name}
-        </div>
-        <div style="font-size: 24px;">🗺️</div>
-      </div>
-    `;
-    return;
-  }
-
-  // 카카오맵 로드 완료 후 실행
-  window.kakao.maps.load(() => {
-    // 선택한 위치의 좌표
-    const position = new window.kakao.maps.LatLng(location.lat, location.lng);
-
-    // 지도 생성
-    const mapOption = {
-      center: position,
-      level: 3,
-    };
-
-    const mainMap = new window.kakao.maps.Map(mapEl.value, mapOption);
-
-    // 마커 이미지 설정
-    const markerImageSrc =
-      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
-    const markerImageSize = new window.kakao.maps.Size(40, 40);
-    const markerImage = new window.kakao.maps.MarkerImage(
-      markerImageSrc,
-      markerImageSize
-    );
-
-    // 마커 생성
-    const mainMarker = new window.kakao.maps.Marker({
-      position: position,
-      image: markerImage,
-    });
-    mainMarker.setMap(mainMap);
-
-    // 인포윈도우 표시
-    const infowindow = new window.kakao.maps.InfoWindow({
-      content: `<div style="padding: 10px; font-weight: bold; font-size: 14px;">${location.name}</div>`,
-    });
-    infowindow.open(mainMap, mainMarker);
-  });
 }
 
 // 카카오맵 API 로드 및 초기화
@@ -489,13 +375,9 @@ function createRealMap() {
     kakaoMap = new window.kakao.maps.Map(modalMapEl.value, mapOption);
 
     // 마커 이미지 설정
-    const markerImageSrc =
-      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
+    const markerImageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
     const markerImageSize = new window.kakao.maps.Size(40, 40);
-    const markerImage = new window.kakao.maps.MarkerImage(
-      markerImageSrc,
-      markerImageSize
-    );
+    const markerImage = new window.kakao.maps.MarkerImage(markerImageSrc, markerImageSize);
 
     // 마커 생성
     kakaoMarker = new window.kakao.maps.Marker({
@@ -566,7 +448,11 @@ onMounted(() => {
   --radius: 12px;
 
   background: #fff;
+
   padding: clamp(60px, 7vw, 100px) 0;
+  @media (max-width: 768px) {
+    padding: 100px 0 50px;
+  }
 }
 
 .search-main .inner {
@@ -587,107 +473,14 @@ onMounted(() => {
   align-items: center;
   width: 250px;
   height: 180px;
-  background: var(--mint-weak);
-  border-radius: 16px;
-  box-shadow: inset 0 0 0 1px #e7efef;
   overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
+  border-radius: 16px;
 }
 
-.search-main .illustration:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 0 0 1px #e7efef, 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.map-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-}
-
-.search-main .illustration:hover .map-overlay {
-  opacity: 1;
-}
-
-.click-hint {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--mint);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* 지도 컨테이너 */
-.map-container {
-  width: 100%;
-  height: 50vw;
-  position: relative;
-}
-
-.map {
+.search-main .illustration img {
   width: 100%;
   height: 100%;
-  border-radius: 16px;
-}
-
-.location-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 8px;
-  border-radius: 0 0 16px 16px;
-}
-
-.location-info h3 {
-  font-size: 12px;
-  font-weight: 700;
-  margin: 0 0 2px 0;
-  color: var(--ink);
-}
-
-.location-info p {
-  font-size: 10px;
-  margin: 0;
-  color: var(--muted);
-}
-
-.locker-info {
-  font-weight: 600;
-  color: var(--mint) !important;
-}
-
-/* 플레이스홀더 */
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-}
-
-.placeholder-icon {
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-
-.placeholder p {
-  font-size: 14px;
-  margin: 0;
+  object-fit: contain;
 }
 
 /* 텍스트 영역 */
@@ -723,6 +516,9 @@ onMounted(() => {
   border: 1px solid #f0f3f3;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   gap: 10px;
+  @media screen and (max-width: 390px) {
+    margin-top: 10px !important;
+  }
 }
 
 .search-main .searchbar input,
@@ -1070,6 +866,12 @@ onMounted(() => {
     height: 150px;
   }
 
+  .search-main .illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   .search-main .content {
     max-width: 100%;
   }
@@ -1147,6 +949,12 @@ onMounted(() => {
   .search-main .illustration {
     width: 180px;
     height: 130px;
+  }
+
+  .search-main .illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .modal-content {

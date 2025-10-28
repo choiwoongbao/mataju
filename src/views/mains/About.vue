@@ -7,12 +7,7 @@
       </div>
 
       <div class="cards">
-        <div
-          class="card"
-          v-for="(item, i) in services"
-          :key="i"
-          :class="item.class"
-        >
+        <div class="card" v-for="(item, i) in services" :key="i" :class="item.class">
           <h3 v-html="item.title"></h3>
           <p class="desc">{{ item.desc }}</p>
           <div class="img-wrap">
@@ -62,11 +57,13 @@ const services = [
   display: flex;
   justify-content: center;
   font-family: "Pretendard", "Inter", sans-serif;
-
+  @media (max-width: 390px) {
+    padding: 80px 0 0px;
+  }
   .inner {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    // display: flex;
+    // align-items: flex-start;
+    // justify-content: center;
     gap: 80px;
     max-width: 1320px;
     width: 100%;
@@ -81,7 +78,9 @@ const services = [
   }
 
   .left {
-    flex: 0 0 340px;
+    // flex: 0 0 340px;
+    text-align: center;
+    padding: 5% 0;
 
     h2 {
       font-size: clamp(24px, 2.5vw, 35px);
@@ -102,6 +101,8 @@ const services = [
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 34px;
+    justify-content: center;
+    justify-items: center;
 
     @media (max-width: 1080px) {
       grid-template-columns: repeat(2, 1fr);
@@ -122,7 +123,8 @@ const services = [
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
+    justify-items: center;
     text-align: center;
     padding: 32px 16px 28px;
     transition: all 0.3s ease;
@@ -271,8 +273,8 @@ const services = [
   margin-top: 8px !important;
 }
 
-.storage .img-wrap img{
-   margin-bottom: 17px !important; /* 균형 맞춤용 */
+.storage .img-wrap img {
+  margin-bottom: 17px !important; /* 균형 맞춤용 */
   margin-top: -14px !important;
 }
 
@@ -282,6 +284,4 @@ const services = [
   font-weight: 700;
   margin-left: 5px;
 }
-
-
 </style>

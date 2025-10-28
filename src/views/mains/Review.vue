@@ -5,7 +5,7 @@
         <h1>사용자들의 이유 있는 선택</h1>
         <h2><span class="strong">4.83</span>/5</h2>
         <p class="star">★★★★★</p>
-        <p>*2025년 9월 기준</p>
+        <p>*2025년 11월 기준</p>
       </div>
       <!-- Swiper -->
       <div class="swiper reviewSwiper">
@@ -42,56 +42,49 @@ const reviews = ref([
     name: "이**",
     rating: 5,
     date: "2025. 08. 19",
-    comment:
-      "출장 중에도 24시간 언제든 짐을 맡길 수 있어 편리했어요. 배송도 빨랐어요!",
+    comment: "출장 중에도 24시간 언제든 짐을 맡길 수 있어 편리했어요. 배송도 빨랐어요!",
     image: "/images/mains/revieww/image 128.png",
   },
   {
     name: "김**",
     rating: 5,
     date: "2025. 07. 11",
-    comment:
-      "보관만 하려다 배송까지 가능해서 놀랐어요. 무거운 짐 걱정 없이 여행할 수 있었어요.",
+    comment: "보관만 하려다 배송까지 가능해서 놀랐어요. 무거운 짐 걱정 없이 여행할 수 있었어요.",
     image: "/images/mains/revieww/image 131.png",
   },
   {
     name: "이**",
     rating: 4.5,
     date: "2025. 06. 30",
-    comment:
-      "보관과 배송을 한 번에 해결해서 너무 편했어요. 짐도 깨끗하게 도착해서 만족했습니다.",
+    comment: "보관과 배송을 한 번에 해결해서 너무 편했어요. 짐도 깨끗하게 도착해서 만족했습니다.",
     image: "/images/mains/revieww/image 132.png",
   },
   {
     name: "박**",
     rating: 5,
     date: "2025. 08. 02",
-    comment:
-      "응대가 친절하고 배송도 제시간에 도착했어요. 덕분에 짐 없이 여행을 즐길 수 있었습니다.",
+    comment: "응대가 친절하고 배송도 제시간에 도착했어요. 덕분에 짐 없이 여행을 즐길 수 있었습니다.",
     image: "/images/mains/revieww/image 133.png",
   },
   {
     name: "홍**",
     rating: 4,
     date: "2025. 07. 15",
-    comment:
-      "기차역 근처에서 바로 맡기고 숙소로 배송받았어요. 다음에도 이용할게요!",
+    comment: "기차역 근처에서 바로 맡기고 숙소로 배송받았어요. 다음에도 이용할게요!",
     image: "/images/mains/revieww/image 457.png",
   },
   {
     name: "이**",
     rating: 4.8,
     date: "2025. 09. 01",
-    comment:
-      "사물함 크기가 다양해 캐리어 보관도 문제없어요. 배송도 빠르고 서비스가 깔끔합니다.",
+    comment: "사물함 크기가 다양해 캐리어 보관도 문제없어요. 배송도 빠르고 서비스가 깔끔합니다.",
     image: "/images/mains/revieww/image 458.png",
   },
   {
     name: "최**",
     rating: 5,
     date: "2025. 09. 10",
-    comment:
-      "가격이 합리적이고 배송 품질도 좋아요. 친절한 고객센터 덕분에 신뢰가 갔습니다.",
+    comment: "가격이 합리적이고 배송 품질도 좋아요. 친절한 고객센터 덕분에 신뢰가 갔습니다.",
     image: "/images/mains/revieww/image 470.png",
   },
   {
@@ -105,23 +98,21 @@ const reviews = ref([
     name: "박**",
     rating: 5,
     date: "2025. 07. 28",
-    comment:
-      "보관함이 청결하고 냄새도 없었어요. 배송도 빠르고 기사님도 친절했습니다.",
+    comment: "보관함이 청결하고 냄새도 없었어요. 배송도 빠르고 기사님도 친절했습니다.",
     image: "/images/mains/revieww/image 471.png",
   },
   {
     name: "정**",
     rating: 4.7,
     date: "2025. 09. 12",
-    comment:
-      "예약부터 배송까지 간단하고 빠릅니다. 알림으로 진행 상황을 바로 볼 수 있어 좋아요.",
+    comment: "예약부터 배송까지 간단하고 빠릅니다. 알림으로 진행 상황을 바로 볼 수 있어 좋아요.",
     image: "/images/mains/revieww/image 467.png",
   },
 ]);
 
 onMounted(() => {
   new Swiper(".reviewSwiper", {
-    slidesPerView: 3, //
+    slidesPerView: 1, //
     centeredSlides: true,
     loop: true,
     loopedSlides: reviews.value.length,
@@ -152,6 +143,12 @@ onMounted(() => {
 .review_wrap {
   padding: $title-big-gap-large;
   overflow: hidden;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+  @media (max-width: 390px) {
+    padding: 100px 0 0px;
+  }
 }
 
 .inner {
@@ -164,6 +161,9 @@ onMounted(() => {
 
 .title {
   margin-bottom: $text-big-gap-large;
+  @media (max-width: 390px) {
+    margin: 0;
+  }
 }
 
 .title h1 {
@@ -184,8 +184,13 @@ onMounted(() => {
 }
 
 .reviewSwiper {
+  padding: 1%;
   overflow: hidden;
+  // background-color: red;
   margin-top: $text-big-gap-large;
+  @media (max-width: 390px) {
+    margin-top: 0;
+  }
 }
 
 /* 슬라이드 */
@@ -293,10 +298,7 @@ onMounted(() => {
   }
   .review_card {
     max-width: 90%;
-    min-height: 300px;
-  }
-  .reviewSwiper {
-    margin-top: 80px;
+    // min-height: 300px;
   }
 }
 </style>

@@ -120,8 +120,11 @@
           <div class="summary_card">
             <h2 class="card_title">선택 상품 요약</h2>
             <table>
+                                <colgroup>
+    <col style="width: 65%;" />   <!-- 왼쪽열 -->
+    <col style="width: 35%;" />   <!-- 오른쪽열 -->
+  </colgroup>
               <tbody>
-
                 <tr>
                   <td>선택상품</td>
                   <td>{{ selectedService || "선택 필요" }}</td>
@@ -205,22 +208,25 @@ const handleSubmit = () => {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss" >
+@use "/src/assets/style/variables" as *;
 
-.inner{
-  max-width: 1120px;
-  margin: auto;
-}
+/* =========================================================
+페이지 전체 레이아웃
+========================================================= */
 .wrap {
   background: #f5f7f7;
-  padding: 80px 0;
+  padding: 40px 0;
 }
 
 .inner {
+  max-width: 1120px;
+  margin: auto;
+
   .container {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 40px;
+    gap: 2.5rem;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
@@ -230,7 +236,7 @@ const handleSubmit = () => {
   .left {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.3rem;
   }
 
   .right {
@@ -238,22 +244,24 @@ const handleSubmit = () => {
     align-self: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center
+    gap: 1.3rem;
+    align-items: center;
   }
 }
 
-.blank16{
+.blank16 {
   height: 4px;
   color: transparent;
 }
 
-/* ========== Form Card (Left) ========== */
-.form_card {
+/* =========================================================
+카드 공통 스타일
+========================================================= */
+.form_card,
+.summary_card {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 30px 40px;
   border: 1px solid transparent;
   position: relative;
   transition: all 0.3s ease;
@@ -269,16 +277,22 @@ const handleSubmit = () => {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
+}
+
+/* =========================================================
+왼쪽 입력 카드 (Form Card)
+========================================================= */
+.form_card {
+  padding: 28px 40px 20px;
 
   .card_header {
-    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
 
     h3 {
-      font-size: 18px;
+      font-size: $text-md;
       font-weight: 600;
       margin: 0;
     }
@@ -299,8 +313,9 @@ const handleSubmit = () => {
 
     label {
       display: block;
-      font-size: 14px;
+      font-size: $label-md;
       color: #555;
+      margin-top: 20px;
       margin-bottom: 6px;
       font-weight: 500;
     }
@@ -311,7 +326,7 @@ const handleSubmit = () => {
       border: none;
       border-bottom: 1px solid #e7e7e7;
       background: transparent;
-      font-size: 14px;
+      font-size: $label-md;
       padding: 10px 5px;
       color: #333;
       transition: border-color 0.2s ease;
@@ -327,7 +342,7 @@ const handleSubmit = () => {
     }
 
     .label {
-      font-size: 13px;
+      font-size: $label-sm;
       color: #888;
       margin-top: 4px;
     }
@@ -346,7 +361,7 @@ const handleSubmit = () => {
       color: #fff;
       border: none;
       cursor: pointer;
-      font-size: 13px;
+      font-size: $label-sm;
 
       &:hover {
         background: #449b8a;
@@ -355,47 +370,31 @@ const handleSubmit = () => {
   }
 }
 
-/* ==========  Summary Card (Right) ========== */
+/* =========================================================
+오른쪽 요약 카드 (Summary Card)
+========================================================= */
 .summary_card {
   width: 100%;
-  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 30px 40px;
-  border: 1px solid transparent;
-  position: relative;
-  // transition: all 0.3s ease;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: #53b4a1;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
 
   .card_title {
-    font-size: 18px;
+    font-size:$text-md;
     font-weight: 600;
     color: #222;
-   margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
+  /* ✅ 표 전체 구조 */
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size:$text-sm;
     color: #444;
     margin-bottom: 24px;
 
     tr {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
+      display: table-row;
       border-bottom: 1px solid #e7e7e7;
 
       &:last-child {
@@ -407,23 +406,34 @@ const handleSubmit = () => {
         color: #111;
 
         &:last-child {
-          font-size: 16px;
+          font-size: $text-sm;
           color: #53b4a1;
         }
       }
+    }
 
-      td:first-child {
-        color: #777;
-      }
+    td {
+      display: table-cell;
+      text-align: left; /* ✅ 왼쪽 정렬 */
+      padding: 10px 0; /* ✅ 좌우 여백 제거 */
+      vertical-align: middle;
+    }
+
+    td:first-child {
+      color: #777;
+      width: 40%;
     }
   }
-
 }
+
+/* =========================================================
+버튼 (Submit)
+========================================================= */
 .submit_btn {
   width: 70%;
   padding: 14px 0;
   font-weight: 600;
-  font-size: 15px;
+  font-size: $button;
   color: #fff;
   background: #53b4a1;
   border: none;
@@ -436,7 +446,9 @@ const handleSubmit = () => {
   }
 }
 
-/* ========== Transition ========== */
+/* =========================================================
+Transition 효과
+========================================================= */
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.3s ease;
@@ -454,8 +466,9 @@ const handleSubmit = () => {
   max-height: 800px;
 }
 
-
-/* ----------  Responsive ---------- */
+/* =========================================================
+Responsive 반응형
+========================================================= */
 @media (max-width: 1024px) {
   .inner {
     .container {
@@ -463,27 +476,49 @@ const handleSubmit = () => {
       grid-template-columns: 1fr;
       gap: 20px;
     }
-    
-  .left {
-    gap: 20px;
-  }
-   }
-   .form_card {
-  padding: 30px 40px;
 
+    .left {
+      gap: 20px;
+    }
+  }
+
+  .form_card {
+    padding: 30px 40px;
+  }
 }
-}
-@media (max-width: 450px){
+
+@media (max-width: 450px) {
   .inner {
     .container {
       width: 90%;
       grid-template-columns: 1fr;
       gap: 10px;
     }
-      .left {
-    gap: 10px;
+
+    .left {
+      gap: 10px;
+    }
   }
-   }
+}
+/* 1️⃣ Stepper와 카드의 공통 여백 기준을 동일하게 */
+.inner {
+  max-width: 1120px; /* ✅ Stepper와 카드 기준 통일 */
+  margin: 0 auto;
+  padding: 0 40px;   /* ✅ 좌우 여백 추가 (카드와 Stepper 간 기준선 일치) */
+  box-sizing: border-box;
 }
 
+/* 2️⃣ container는 inner 안에 있으므로 max-width 빼기 */
+.container {
+  width: 100%;       /* ✅ inner 내부에서 꽉 차도록 */
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+/* 3️⃣ Stepper 하단과 카드 상단 간격만 살짝 띄우기 */
+.Stepper {
+  margin-bottom: 40px;
+}
 </style>

@@ -13,6 +13,12 @@
             </div>
             <div class="card_content">
               <table>
+                <colgroup>
+                  <col style="width: 65%" />
+                  <!-- 왼쪽열 -->
+                  <col style="width: 35%" />
+                  <!-- 오른쪽열 -->
+                </colgroup>
                 <tbody>
                   <tr>
                     <td>성함</td>
@@ -176,27 +182,30 @@ const saveAndPay = () =>
 </script>
 
 <style lang="scss" scoped>
+@use "/src/assets/style/variables" as *;
+
 /* =========================================================
-   💳 Reservation3 — 고정형 레이아웃 (max-width: 1320px)
+Reservation3 — 고정형 레이아웃 (max-width: 1320px)
 ========================================================= */
 .reserve-page {
   background: #f5f7f7;
   min-height: 60rem;
   width: 100%;
-  padding: 5rem 0;
+  padding: 40px 0;
   overflow-x: hidden;
 }
 
+/* ✅ 공통 컨테이너 */
 .inner {
   width: 100%;
-  max-width: 1120px; /* ✅ 고정 폭 제한 */
+  max-width: 1120px;
   margin: 0 auto;
-  // padding: 0 1.5rem; /* ✅ 여백 살짝 (양쪽 24px) — 선택사항 */
   box-sizing: border-box;
 }
+
 .reserve-container {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1120px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -206,14 +215,15 @@ const saveAndPay = () =>
 
 .paysection {
   width: 100%;
-  max-width: 1320px;
-  margin: 3.75rem auto 0;
+  max-width: 1120px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* 카드 공통 */
+/* =========================================================
+ 카드 공통
+========================================================= */
 .form_card,
 .summary_card,
 .payment_card {
@@ -223,7 +233,6 @@ const saveAndPay = () =>
   padding: 30px 40px;
   position: relative;
   border: 1px solid transparent;
-  // transition: all 0.3s ease;
 
   &::before {
     content: "";
@@ -238,18 +247,20 @@ const saveAndPay = () =>
   }
 }
 
-/* ✅ 첫 번째 카드 표 정렬 수정 */
+/* =========================================================
+   첫 번째 카드 (정보표)
+========================================================= */
 .form_card table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: $text-sm;
   color: #333;
 
   td {
-    padding: 0.4rem 0.6rem;
+    padding: 6px 0; /* 위아래만 여백 — 좌우 여백 제거 */
     text-align: left;
     vertical-align: middle;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   td:first-child {
@@ -260,11 +271,12 @@ const saveAndPay = () =>
 
   td:last-child {
     width: 60%;
-    color: #222;
+    color: #333;
   }
 
   tr.total {
     border-top: 1px solid #ddd;
+
     td:last-child {
       color: #53b4a1;
       font-weight: 700;
@@ -272,33 +284,76 @@ const saveAndPay = () =>
   }
 }
 
-/* Summary 카드 */
+/* =========================================================
+   Summary 카드
+========================================================= */
 .summary_card {
-  // width: 400px;
-
   .card_title {
-    font-size: 18px;
+    font-size: $text-md;
     font-weight: 600;
     color: #222;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
   }
 
   ul {
-    font-size: 14px;
+    font-size: $text-md;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  li{
+     font-size: $text-sm;
+  }
+  
+  }
+
+  .benefit-row label {
+    font-size: $text-sm;
     color: #444;
-    margin-bottom: 24px;
+  }
+
+  .muted {
+    font-size: $text-sm;
+    color: #d72638;
+    font-weight: 500;
+  }
+
+  .total-row {
+    font-size: $text-md;
+    font-weight: 600;
+    color: #222;
+    // margin-top: 1rem;
+
+    strong {
+      color: #53b4a1;
+      font-weight: 700;
+      font-size: $text-md;
+    }
   }
 }
 
-/* 결제 카드 */
+/* =========================================================
+    결제 카드 (세 번째 카드)
+========================================================= */
+h2 {
+  font-size: $text-md;
+}
 .payment_card {
   width: 100%;
+  padding: 24px 32px !important; /* 내부 여백 20% 축소 */
+
+  .card_header {
+    margin-bottom: 12px !important; /* 제목-내용 간격 좁게 */
+  }
+
+  .card_content {
+    margin-top: 0.25rem !important;
+  }
 
   .pay-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 8px !important; /* 버튼 간격 축소 */
+    margin-bottom: 12px !important;
   }
 
   .pay-card {
@@ -306,7 +361,7 @@ const saveAndPay = () =>
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 16px 0;
+    padding: 12px 0 !important; /* 버튼 높이 축소 */
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
@@ -325,23 +380,28 @@ const saveAndPay = () =>
     }
 
     .icon {
-      font-size: 18px;
+      font-size: $text-md;
     }
+  }
+
+  .submit_btn {
+    margin-top: 16px !important; /* 결제 버튼 상단 여백 좁게 */
   }
 }
 
-/* 결제 버튼 */
+/* =========================================================
+    결제 버튼 공통
+========================================================= */
 .submit_btn {
   width: 70%;
   padding: 14px 0;
   font-weight: 600;
-  font-size: 15px;
+  font-size: $button;
   color: #fff;
   background: #53b4a1;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  // transition: 0.3s ease;
   display: block;
   margin: 20px auto 0;
 
@@ -350,11 +410,14 @@ const saveAndPay = () =>
   }
 }
 
-/* 반응형 */
+/* =========================================================
+    반응형
+========================================================= */
 @media (max-width: 1024px) {
   .reserve-container {
     grid-template-columns: 1fr;
     gap: 20px;
+    max-width: 600px;
   }
 
   .form_card,
@@ -363,30 +426,31 @@ const saveAndPay = () =>
     width: 90%;
     margin-inline: auto;
   }
-
-  .paysection {
-    margin-top: 2rem;
-  }
+.wrap_reserv[data-v-cc353735] {
+    display: flex
+;
+    flex-direction: column;
+    gap: 20px;
 }
-/* =========================================================
-   4️⃣ 내부 구조 & 요약 카드 세부 스타일 보완
-========================================================= */
+}
 
-/* wrap_reserv : 전체 상·하단 구역 간격 */
+/* =========================================================
+   내부 구조 & 요약 카드 세부 스타일 보완
+========================================================= */
 .wrap_reserv {
   display: flex;
   flex-direction: column;
-  gap: 3rem; /* 위아래 카드 간 간격 */
+  gap: 2.5rem;
+//  padding: 80px 0;
 }
 
-/* 카드 내부 기본 구조 */
 .card_header {
-  margin-bottom: 1rem;
+  margin-bottom: 15px; /* 결제완료 카드와 리듬 통일 */
 
   h3 {
-    font-size: 1rem;
+    font-size: $text-md;
     font-weight: 600;
-    color: #222;
+    color: #333;
     margin: 0;
   }
 }
@@ -395,7 +459,6 @@ const saveAndPay = () =>
   margin-top: 0.5rem;
 }
 
-/* Summary 카드 내부 세부요소 */
 .divider {
   height: 1px;
   background: #eee;
@@ -406,10 +469,11 @@ const saveAndPay = () =>
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  // margin-bottom: 0.75rem;
+  padding: 6px 0;
 
   label {
-    font-size: 0.875rem;
+    font-size: $label-lg;
     color: #333;
     display: flex;
     align-items: center;
@@ -417,23 +481,19 @@ const saveAndPay = () =>
   }
 }
 
-.muted {
-  color: #d72638;
-  font-size: 0.8125rem;
-  font-weight: 500;
-}
-
 .total-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9375rem;
+  font-size: $text-md;
   font-weight: 600;
-  color: #222;
-  margin-top: 1rem;
+  color: #333;
+  margin-top: 20px; /* 여백 확장으로 시각적 안정감 */
 
   strong {
     color: #53b4a1;
+    font-size: $text-md;
   }
 }
+
 </style>

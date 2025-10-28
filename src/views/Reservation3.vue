@@ -12,6 +12,10 @@
 
           <div class="card_content">
             <table class="receipt_table">
+                <colgroup>
+    <col style="width: 65%;" />   <!-- 왼쪽열 -->
+    <col style="width: 35%;" />   <!-- 오른쪽열 -->
+  </colgroup>
               <tbody>
                 <tr><td>상품명</td><td>사물함 대여</td></tr>
                 <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
@@ -36,6 +40,10 @@
 
           <div class="card_content">
             <table class="receipt_table">
+                       <colgroup>
+    <col style="width: 65%;" />   <!-- 왼쪽열 -->
+    <col style="width: 35%;" />   <!-- 오른쪽열 -->
+  </colgroup>
               <tbody>
                 <tr><td>상품명</td><td>사물함 대여</td></tr>
                 <tr><td>결제 수단</td><td>신용카드 (💳)</td></tr>
@@ -61,23 +69,36 @@ import Stepper from "@/components/reserv/Stepper.vue";
 </script>
 
 <style scoped lang="scss">
+@use "/src/assets/style/variables" as *;
 
-/*  페이지 배경 (고정) */
-.card-test {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* =========================================================
+  페이지 배경 및 전체 레이아웃
+========================================================= */
+.reserve-page {
   background: #f5f7f7;
+  // padding: 5rem 0;
+  // min-height: 60rem;
 }
 
-/* 카드 기본 구조 (hover 완전 비활성화 + 이유 주석 포함) */
+.inner {
+  width: 100%;
+  max-width: 1120px; /* ✅ reservation2와 동일 폭 */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Stepper + 카드 중앙 정렬 */
+  padding: 40px 0;
+}
+
+/* =========================================================
+ 카드 공통 스타일
+========================================================= */
 .form_card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);         // ✔ 항상 동일한 그림자(hover 시에도 절대 변화 없음)
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); // ✔ hover 시에도 변하지 않는 그림자
   padding: 30px 40px;
-  border: 1px solid #fff;      // ✔ 'transparent' 대신 흰색 고정 → hover 시 재렌더링에 의한 색 흔들림 방지
+  border: 1px solid #fff; // ✔ hover 시 재렌더링 흔들림 방지
   position: relative;
   width: 600px;
 
@@ -91,62 +112,22 @@ import Stepper from "@/components/reserv/Stepper.vue";
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-
-  /* hover 효과 완전 비활성화
-     ────────────────────────────────────────────────────────────────
-     왜?
-     1) hover 시 브라우저가 border/그림자 레이어를 재렌더링(repaint)하며
-        명암이 달라 보이는 현상이 생김 (특히 투명 테두리일 때 두드러짐).
-     2) 디자인 일관성을 위해 카드 상태를 '정적'으로 고정.
-     어떻게?
-     - hover 블록 전체를 주석 처리
-     - transition(전환)도 주석 처리하여 미세 애니메이션까지 차단
-  */
-  // &:hover {
-  //   border-color: #53b4a1;
-  //   background: #f9fdfd;
-  //   box-shadow: 0 8px 25px rgba(83, 180, 161, 0.25);
-  // }
-  // transition: all 0.3s ease;
-
   .card_header h3 {
-    font-size: 18px;
+    font-size:$text-md;
     font-weight: 600;
     color: #222;
     margin: 0 0 15px;
   }
-
-  /* ✅ 버튼은 UX를 위해 hover '만' 유지 (카드는 고정)
-     ────────────────────────────────────────────────────────────────
-     - 카드와 무관한 요소이므로 버튼 hover는 사용자 피드백용으로 살림
-     - 카드 hover와 분리되어 카드 그림자/배경에는 영향 없음
-  */
 }
 
-.submit_btn {
-  width: 80%;
-  margin-top: 20px;
-  max-width: 300px;
-  padding: 14px 0;
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff;
-  background: #53b4a1;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease; /* 버튼만 부드럽게 */
-
-  &:hover {
-    background: #449b8a;
-  }
-}
-/* ✅ 결제완료 카드 (영수증 문구/표 스타일) */
+/* =========================================================
+  결제완료 / 영수증 카드
+========================================================= */
 .receipt_card {
   text-align: center;
 
   .check_icon {
-    font-size: 48px;
+    font-size:$title-md;
     margin-bottom: 10px;
   }
 
@@ -156,9 +137,10 @@ import Stepper from "@/components/reserv/Stepper.vue";
     margin-bottom: 20px;
   }
 
+  /*  표 스타일 */
   .receipt_table {
     width: 100%;
-    font-size: 14px;
+    font-size: $text-sm;
     border-collapse: collapse;
     margin-bottom: 24px;
 
@@ -182,35 +164,54 @@ import Stepper from "@/components/reserv/Stepper.vue";
 
         &:last-child {
           color: #53b4a1;
-          font-size: 16px;
+          font-size:$text-md;
         }
       }
     }
   }
 
+  /* ✅ 하단 문구 */
   .receipt_footer {
     text-align: left;
-    font-size: 13px;
+    font-size: $label-md;
     color: #888;
     border-top: 1px dashed #e7e7e7;
     padding-top: 10px;
     margin-bottom: 20px;
   }
 }
-/* ✅ 페이지 전체 레이아웃 (reservation2와 통일) */
-.reserve-page {
-  background: #f5f7f7;
-  padding: 5rem 0;
-  min-height: 60rem;
+
+/* =========================================================
+    버튼 (카드 내부 공통)
+========================================================= */
+.submit_btn {
+  width: 80%;
+  margin-top: 20px;
+  max-width: 300px;
+  padding: 14px 0;
+  font-size: $button;
+  font-weight: 600;
+  color: #fff;
+  background: #53b4a1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease; /* 버튼만 부드럽게 */
+
+  &:hover {
+    background: #449b8a;
+  }
 }
 
-.inner {
-  width: 100%;
-  max-width: 1120px; /* ✅ reservation2와 동일 폭 */
-  margin: 0 auto;
+/* =========================================================
+   임시 레이아웃
+========================================================= */
+.card-test {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Stepper + 카드 중앙 정렬 */
+  justify-content: center;
+  align-items: center;
+  background: #f5f7f7;
 }
 
 </style>

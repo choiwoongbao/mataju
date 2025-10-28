@@ -6,8 +6,7 @@
         :modules="[Autoplay, Navigation]"
         :autoplay="{ delay: 2500, disableOnInteraction: false }"
         :navigation="true"
-        :loop="true"
-      >
+        :loop="true">
         <!-- slide 1 -->
         <swiper-slide>
           <div class="banner-grid">
@@ -37,6 +36,7 @@
         </swiper-slide>
       </swiper>
     </div>
+    <QuickR class="quickr" />
   </section>
 </template>
 
@@ -45,19 +45,33 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
+import QuickR from "./QuickR.vue";
 </script>
 
 <style lang="scss" scoped>
+.banner-outer {
+  position: relative;
+  // z-index: 10;
+}
 /* =========================================================
    1920px 기준 높이 530px 유지 / 비율 고정 반응형
    1000px 이하부터는 세로형 레이아웃 전환
    ========================================================= */
-
+.quickr {
+  position: absolute;
+  left: 50%;
+  bottom: -35px;
+  transform: translatex(-50%);
+  width: calc(100% - 48px);
+  max-width: 1320px;
+  z-index: 20;
+  pointer-events: none;
+}
 /* 배경 */
 .banner-outer {
   width: 100%;
   background: #f6f6f6;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 /* 컨테이너 */

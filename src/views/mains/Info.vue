@@ -11,15 +11,17 @@
             :class="{ active: activeTab === 'storage' }"
             role="tab"
             :aria-selected="activeTab === 'storage'"
-            @click="activeTab = 'storage'"
-          >보관</button>
+            @click="activeTab = 'storage'">
+            보관
+          </button>
           <button
             class="tab"
             :class="{ active: activeTab === 'delivery' }"
             role="tab"
             :aria-selected="activeTab === 'delivery'"
-            @click="activeTab = 'delivery'"
-          >배송</button>
+            @click="activeTab = 'delivery'">
+            배송
+          </button>
         </div>
 
         <!-- 공통 캐러셀 패널 -->
@@ -28,25 +30,18 @@
           :key="type"
           v-show="activeTab === type"
           class="panel"
-          role="tabpanel"
-        >
+          role="tabpanel">
           <div class="carousel">
-            <button
-              class="nav prev"
-              aria-label="이전"
-              @click="prev(type)"
-              :disabled="isAtStart(type)"
-            >‹</button>
+            <button class="nav prev" aria-label="이전" @click="prev(type)" :disabled="isAtStart(type)">‹</button>
 
             <div class="viewport">
               <div class="track" :style="trackStyle(type)">
                 <article
-                  v-for="(item, i) in (type === 'storage' ? baseStorage : baseDelivery)"
+                  v-for="(item, i) in type === 'storage' ? baseStorage : baseDelivery"
                   :key="item.id"
                   class="slide"
                   :id="item.id"
-                  :style="slideStyle(type)"
-                >
+                  :style="slideStyle(type)">
                   <div class="thumb">
                     <img :src="item.img" :alt="item.label" loading="lazy" />
                   </div>
@@ -57,19 +52,12 @@
               </div>
             </div>
 
-            <button
-              class="nav next"
-              aria-label="다음"
-              @click="next(type)"
-              :disabled="isAtEnd(type)"
-            >›</button>
+            <button class="nav next" aria-label="다음" @click="next(type)" :disabled="isAtEnd(type)">›</button>
           </div>
 
           <!-- ✅ 요금 안내 페이지로 이동 -->
           <div class="more-row">
-            <router-link class="more" to="/information2">
-              자세히 보러 가기 →
-            </router-link>
+            <router-link class="more" to="/information2"> 자세히 보러 가기 → </router-link>
           </div>
         </div>
       </div>
@@ -82,19 +70,55 @@ import { computed, onMounted, onBeforeUnmount, reactive, ref } from "vue";
 
 /* ===== 데이터 ===== */
 const baseStorage = [
-  { id: "mini",   label: "XS", meta: "에코백, 백팩, 서류 가방", price: "10,000원부터", img: "/public/images/mains/info/info-xs.png" },
-  { id: "small",  label: "S",  meta: "에코백, 백팩, 서류 가방", price: "17,000원부터", img: "/public/images/mains/info/info-s.png" },
-  { id: "medium", label: "M",  meta: "에코백, 백팩, 서류 가방", price: "23,000원부터", img: "/public/images/mains/info/info-m.png" },
-  { id: "large",  label: "L",  meta: "에코백, 백팩, 서류 가방", price: "29,000원부터", img: "/public/images/mains/info/info-l.png" },
-  { id: "xlarge", label: "XL", meta: "에코백, 백팩, 서류 가방", price: "35,000원부터", img: "/public/images/mains/info/info-xl.png" },
+  {
+    id: "mini",
+    label: "XS",
+    meta: "에코백, 백팩, 서류 가방",
+    price: "10,000원부터",
+    img: "/public/images/mains/info/info-xs.png",
+  },
+  {
+    id: "small",
+    label: "S",
+    meta: "에코백, 백팩, 서류 가방",
+    price: "17,000원부터",
+    img: "/public/images/mains/info/info-s.png",
+  },
+  {
+    id: "medium",
+    label: "M",
+    meta: "에코백, 백팩, 서류 가방",
+    price: "23,000원부터",
+    img: "/public/images/mains/info/info-m.png",
+  },
+  {
+    id: "large",
+    label: "L",
+    meta: "에코백, 백팩, 서류 가방",
+    price: "29,000원부터",
+    img: "/public/images/mains/info/info-l.png",
+  },
+  {
+    id: "xlarge",
+    label: "XL",
+    meta: "에코백, 백팩, 서류 가방",
+    price: "35,000원부터",
+    img: "/public/images/mains/info/info-xl.png",
+  },
 ];
 
 const baseDelivery = [
-  { id: "d1", label: "XS", meta: "도심 당일 픽업", price: "10,000원부터", img: "/public/images/mains/info/info-xs.png" },
-  { id: "d2", label: "S",  meta: "서울 · 수도권",  price: "17,000원부터", img: "/public/images/mains/info/info-s.png" },
-  { id: "d3", label: "M",  meta: "전국 익일",     price: "23,000원부터", img: "/public/images/mains/info/info-m.png" },
-  { id: "d4", label: "L",  meta: "공항 직행",     price: "29,000원부터", img: "/public/images/mains/info/info-l.png" },
-  { id: "d5", label: "XL", meta: "제주 · 도서",   price: "35,000원부터", img: "/public/images/mains/info/info-xl.png" },
+  {
+    id: "d1",
+    label: "XS",
+    meta: "도심 당일 픽업",
+    price: "10,000원부터",
+    img: "/public/images/mains/info/info-xs.png",
+  },
+  { id: "d2", label: "S", meta: "서울 · 수도권", price: "17,000원부터", img: "/public/images/mains/info/info-s.png" },
+  { id: "d3", label: "M", meta: "전국 익일", price: "23,000원부터", img: "/public/images/mains/info/info-m.png" },
+  { id: "d4", label: "L", meta: "공항 직행", price: "29,000원부터", img: "/public/images/mains/info/info-l.png" },
+  { id: "d5", label: "XL", meta: "제주 · 도서", price: "35,000원부터", img: "/public/images/mains/info/info-xl.png" },
 ];
 
 const activeTab = ref("storage");
@@ -123,7 +147,9 @@ function next(key) {
 function prev(key) {
   state[key].index = Math.max(state[key].index - 1, 0);
 }
-function isAtStart(key) { return state[key].index <= 0; }
+function isAtStart(key) {
+  return state[key].index <= 0;
+}
 function isAtEnd(key) {
   const total = key === "storage" ? baseStorage.length : baseDelivery.length;
   const maxIndex = Math.max(0, total - perView.value);
@@ -149,6 +175,13 @@ function slideStyle(key) {
 .info-main .pricing-section {
   padding: clamp(24px, 4vw, 56px) 0;
   color: #111;
+
+  @media (max-width: 768px) {
+    padding: 100px 0 0px;
+  }
+  @media (max-width: 390px) {
+    padding: 100px 0 0px;
+  }
 }
 .info-main .inner {
   max-width: 1320px;
@@ -171,6 +204,9 @@ function slideStyle(key) {
   overflow: hidden;
   border: 1px solid #d9e1e1;
   margin: 0 auto clamp(28px, 4vw, 44px);
+  @media (max-width: 390px) {
+    margin: 0;
+  }
 }
 .info-main .tab {
   min-width: 160px;
@@ -225,7 +261,7 @@ function slideStyle(key) {
   align-items: center;
   justify-content: flex-end;
   text-align: center;
-  height: 460px;
+  /* height: 460px; */
   padding: clamp(8px, 1vw, 16px);
   box-sizing: border-box;
 }
@@ -349,5 +385,4 @@ function slideStyle(key) {
 #xlarge .thumb img:hover {
   transform: scale(1.1) translateY(15px) !important; /* ✅ 기본 상태 유지 */
 }
-
 </style>

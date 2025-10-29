@@ -3,7 +3,6 @@
   <section class="reserve-page">
     <div class="inner">
       <Stepper :current-step="3" />
-
       <div class="card-test">
         <div class="form_card receipt_card">
           <div class="card_header">

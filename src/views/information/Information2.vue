@@ -1,5 +1,6 @@
 <template>
-  <section class="locker-sizes v2">
+  <div class="info-inner">
+<section class="locker-sizes v2">
     <header class="ls-head">
       <h3>사물함 사이즈</h3>
       <p class="sub">용도에 맞는 사이즈를 선택하면 상세 정보를 보여드릴게요.</p>
@@ -115,6 +116,7 @@
       </div>
     </transition>
   </section>
+  </div>
 </template>
 
 <script setup>
@@ -149,9 +151,15 @@ function toggleFees(){ showFees.value = !showFees.value }
 </script>
 
 <style scoped>
+.info-inner {
+  box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
 .locker-sizes.v2{ width:min(1100px,92vw); margin:0 auto; }
-.ls-head h3{ margin:0; font-size:clamp(18px,2vw,24px); font-weight:900; }
-.ls-head .sub{ margin:6px 0 14px; color:#667085; }
+.ls-head h3{ margin:0; font-size:clamp(18px,2vw,32px); font-weight:800; color: #000;}
+.ls-head .sub{ margin:6px 0 14px; color:#555353; font-size: 18px;}
 
 /* ====== 탭 ====== */
 .size-strip{

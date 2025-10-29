@@ -6,40 +6,26 @@
 
     <!-- Desktop Menu -->
     <div class="menu">
-      <router-link class="dropdown"
+      <router-link class="dropdown"to="/information"
         >이용안내
-        <ul class="submenu">
-          <li><router-link to="/information">이용방법</router-link></li>
-          <li><router-link to="/information2">요금안내</router-link></li>
-        </ul>
+      
       </router-link>
 
-      <router-link class="dropdown"
+      <router-link class="dropdown" to="/reservation"
         >예약하기
-        <ul class="submenu">
-          <li><router-link to="/reservation">예약하기</router-link></li>
-          <li><router-link to="/reservation2">예약2 결제창</router-link></li>
-          <li><router-link to="/reservation3">예약3 결과창</router-link></li>
-        </ul>
+    
       </router-link>
 
       <router-link to="/promotion">프로모션</router-link>
 
-      <router-link class="dropdown"
+      <router-link class="dropdown" to="/community"
         >커뮤니티
-        <ul class="submenu">
-          <li><router-link to="/community">자유게시판</router-link></li>
-          <li><router-link to="/community2">후기</router-link></li>
-        </ul>
+     
       </router-link>
 
-      <router-link class="dropdown"
+      <router-link class="dropdown" to="/support"
         >고객센터
-        <ul class="submenu">
-          <li><router-link to="/support">자주하는 질문</router-link></li>
-          <li><router-link to="/support2">공지사항</router-link></li>
-          <li><router-link to="/support3">문의하기</router-link></li>
-        </ul>
+    
       </router-link>
 
       <div class="login">

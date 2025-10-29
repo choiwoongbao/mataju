@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import Information from "@/views/Information.vue";
-import Information2 from "@/views/Information2.vue";
+import Information from "@/views/information/Information.vue";
+import Information2 from "@/views/information/Information2.vue";
 import Reservation from "@/views/Reservation.vue";
 
 import ReserveForm from "@/components/reserv/ReserveForm.vue";

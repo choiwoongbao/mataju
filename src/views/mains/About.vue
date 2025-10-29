@@ -78,7 +78,7 @@ const services = [
     grid-template-columns:repeat(3,1fr);
     gap:34px;
 
-    @media (max-width:1358px){ padding-top:5%; }
+    @media (max-width:1358px){ padding-top:5.0001%; }
     @media (max-width:1080px){ grid-template-columns:repeat(1,1fr); gap:28px; }
     @media (max-width:1080px){ display:block; max-width:290px; margin:auto; }
     @media (max-width:390px){ padding-top:50px; }

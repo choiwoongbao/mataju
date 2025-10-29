@@ -404,7 +404,7 @@ onBeforeUnmount(() => {
 
 /* 배경(하늘/구름/해/사막/바위/선인장) */
 .wb-bg { position: absolute; inset: 0; z-index: 1; }
-.sky { position: absolute; inset: 0 0 35% 0; background: linear-gradient(#a8d8ff 0%, #bfe6ff 40%, #eaf6ff 100%); }
+.sky { position: absolute; inset: 0 0 35% 0; background: linear-gradient(#a8d8ff 0%, #bfe6ff 40%, #eaf6ff 100%); height: 80%; }
 .sun {
   position: absolute; top: 18%; left: 55%;
   width: clamp(48px, 6vw, 80px); aspect-ratio: 1/1; border-radius: 50%;
@@ -414,7 +414,7 @@ onBeforeUnmount(() => {
 .cloud { position: absolute; top: 18%; width: clamp(80px, 12vw, 160px); height: clamp(24px, 4vw, 48px); background: #fff; border-radius: 999px; opacity: .8; filter: blur(0.2px); }
 .cloud.c1 { left: 8%; }
 .cloud.c2 { left: 28%; top: 22%; width: clamp(60px, 10vw, 120px); opacity: .85; }
-.ground { position: absolute; inset: auto 0 0 0; height: 35%; background: linear-gradient(#e8c07a, #d3a55e); border-top: 1px solid rgba(0,0,0,.06); }
+.ground { position: absolute; inset: auto 0 0 0; height: 20%; background: linear-gradient(#e8c07a, #d3a55e); border-top: 1px solid rgba(0,0,0,.06); }
 .mesa {
   position: absolute; bottom: calc(35% - 2px);
   width: clamp(100px, 18vw, 260px); height: clamp(40px, 10vw, 120px);

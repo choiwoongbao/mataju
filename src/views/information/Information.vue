@@ -166,13 +166,13 @@ import Information3 from './Information3.vue';
   text-align: left;
 }
 .step-first {
-  color: #028587;
+  color: #3A8C88;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 2px;
 }
 .step-second {
-  color: #028587;
+  color: #3A8C88;
   font-weight: 700;
   font-size: 16px;
 }
@@ -218,7 +218,7 @@ import Information3 from './Information3.vue';
 .step-icon {
   width: 50px;
   height: 50px;
-  background-color: #028587;
+  background-color: #3A8C88;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -244,11 +244,110 @@ import Information3 from './Information3.vue';
   width: 22px;
   height: 22px;
   fill: none;
-  stroke: #028587;
+  stroke: #3A8C88;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
+/* 1290px */
+@media (max-width: 1290px) {
+  .info-inner { padding: 0 60px; }        
+  .info-title { font-size: 30px; }
+  .info-sub { font-size: 17px; }
 
+  .info-steps { gap: 27px; }
+  .step-card {
+    width: 188px;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+  .step-first { font-size: 13px; }
+  .step-second { font-size: 15px; }
+  .step-txt { font-size: 14px; }
+  .step-icon { width: 46px; height: 46px; }
+  .step-icon svg { width: 30px; height: 30px; }
+  .info-arrow svg { width: 20px; height: 20px; }
+}
+
+/* 1100px */
+@media (max-width: 1100px) {
+  .info-inner { padding: 0 100px; }
+
+  .info-steps {
+    flex-wrap: nowrap;            
+    gap: 20px;    
+    list-style: none;     
+       align-items: stretch;              
+  }
+  .step-card {
+    width: 160px; 
+    min-height: 200px;                
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  .step-first { font-size: 12px; }
+  .step-second { font-size: 13.5px; }
+  .step-line { margin: 15px 0; }
+  .step-txt { font-size: 13px; line-height: 1.45; min-height: auto; flex-grow: 1; }
+
+  .step-icon { width: 36px; height: 36px; flex-shrink: 0; }
+  .step-icon svg { width: 20px; height: 20px; }
+
+  .info-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+  }
+  .info-title { font-size: 26px; }
+  .info-sub { font-size: 15px; }
+}
+
+/* 768 + 390px */
+@media (max-width: 768px) and (min-width: 380px) {
+  .info-inner { padding: 0 20px; }
+
+  .info-steps{
+    display: grid;
+  align-items: center;
+justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .info-steps .step-card{
+    max-width: none;
+    padding: 18px 16px;
+    border-radius: 14px;
+    box-sizing: border-box;
+  }
+  .info-steps .info-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .info-steps .info-arrow svg{
+    width: 20px; height: 20px;
+    stroke: #3A8C88;
+  }
+
+  .info-steps > :nth-child(4){
+    display: none;            
+  }
+
+  /* 2행: 카드3 → 카드4 */
+  .info-steps > :nth-child(5){ grid-column: 1; grid-row: 3; } /* 카드3 */
+  .info-steps > :nth-child(6){ grid-column: 2; grid-row: 3; } /* 화살표(가로) */
+  .info-steps > :nth-child(7){ grid-column: 3; grid-row: 3; } /* 카드4 */
+
+  /* 텍스트/아이콘 살짝 압축(두 줄에 깔끔히 맞추기) */
+  .step-first  { font-size: 13px; }
+  .step-second { font-size: 13px; }
+  .step-line   { margin: 10px 0; }
+  .step-txt    { font-size: 12.5px; line-height: 1.45; min-height: auto; }
+  .step-icon   { width: 36px; height: 36px; margin-top: 10px; }
+  .step-icon svg{ width: 24px; height: 24px; }
+}
 </style>

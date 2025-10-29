@@ -328,7 +328,7 @@
 }
 .benefit-text > .fit-text1 {
   font-size: $text-md;
-  font-weight: bold;
+  font-weight: 700;
   margin: 6px 0 2px;
   color: #000;
 }

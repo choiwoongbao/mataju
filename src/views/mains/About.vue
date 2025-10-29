@@ -93,7 +93,7 @@ const services = [
 
     &:hover{ transform:translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,.08); }
 
-    h3{ font-size:clamp(25px,2.6vw,27px); font-weight:700; color:#111; margin-bottom:4px; }
+    h3{ font-size:clamp(25px,2.6vw,27px); font-weight:701; color:#111; margin-bottom:4px; }
     .desc{ font-size:clamp(14px,1.3vw,15px); color:#333; margin:0 0 40px; line-height:1.5; }
 
     .img-wrap{

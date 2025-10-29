@@ -1,60 +1,4 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <p>회원가입을 진행해주세요</p>
-    <button @click="goToLogin">회원가입하기</button>
-  </div>
-<h1>임시 회원가입</h1>
-<!-- ==================================================== -->
-
-  <div class="join-page">
-    <!-- ✅ 상단 영역 -->
-    <header class="header">
-      <div class="logo left">로고</div>
-      <h1>회원가입</h1>
-      <div class="logo right">로고</div>
-    </header>
-
-    <!-- ✅ 메인 카드 -->
-    <div class="join-card">
-      <form>
-        <div class="form-group">
-          <label>휴대폰 번호</label>
-          <div class="input-row">
-            <input type="text" placeholder="번호를 입력해 주세요" />
-            <button type="button" class="btn small">인증 요청</button>
-          </div>
-          <p class="desc">-없이 입력</p>
-        </div>
-
-        <div class="form-group">
-          <label>인증번호</label>
-          <div class="input-row">
-            <input type="text" placeholder="인증번호" />
-            <button type="button" class="btn small">인증 하기</button>
-          </div>
-          <p class="desc">번호를 입력해 주세요</p>
-        </div>
-
-        <div class="terms">
-          <div class="term-header">
-            <label><input type="checkbox" /> 전체 동의합니다</label>
-          </div>
-          <ul>
-            <li><label><input type="checkbox" /> [필수] 만 14세 이상입니다.</label></li>
-            <li><label><input type="checkbox" /> [필수] 서비스 이용약관 동의 (보기)</label></li>
-            <li><label><input type="checkbox" /> [필수] 개인정보 수집 및 이용동의 (보기)</label></li>
-            <li><label><input type="checkbox" /> [필수] 개인정보 제3자 제공동의 (보기)</label></li>
-            <li><label><input type="checkbox" /> [선택] 마케팅 목적 개인정보 수집 및 이용동의 (보기)</label></li>
-          </ul>
-        </div>
-
-        <button type="submit" class="btn primary full">이용동의</button>
-      </form>
-    </div>
-  </div>
-
-
 
 <!-- ==================================================== -->
  <div class="join-page">
@@ -70,42 +14,42 @@
       <form>
         <div class="form-group">
           <div class="form_group">
+            <label>이메일 아이디*</label>
+            <input type="text" placeholder="Matajuu @ amail.com" />
+            <p class="label">회원가입 신청후 받음 메일에서 확인 해야 완료됩니다</p>
+          </div>
+
+          <div class="form_group">
+            <label>비밀번호*</label>
+            <input type="text" placeholder="영문 숫자 포함 8글자 이상" />
+            <p class="label">일치하지 않습니다</p>
+          </div>
+          <div class="form_group">
+            <label>비밀번호 확인*</label>
+            <input type="text" placeholder="비밀번호를 입력해 주세요" />
+            <p class="label">일치하지 않습니다</p>
+          </div>
+          
+          <div class="title-wrap">
+            <h2>선택입력 정보</h2>
+            <!-- <p class="label">짐 배송 및 예약시에 사용됩니다</p> -->
+      </div>
+          <div class="form_group">
             <label>성함*</label>
             <input type="text" placeholder="성함을 입력해주세요" />
-            <p class="label">문자만 입력하세요</p>
+            <p class="label">5자 이하</p>
           </div>
 
           <div class="form_group">
-            <label>휴대폰 번호*</label>
-            <input type="text" placeholder="01012345678 (- 제외)" />
-            <p class="label">숫자만 입력해주세요</p>
+            <label>주소*</label>
+            <input type="text" placeholder="지번 및 도로명 주소를 입력해주세요" />
+            <p class="label">배송시 사용됩니다</p>
+            <div class="gapp"></div>
+            <input type="text" placeholder="상세주소를 입력해주세요" />
+            <p class="label">상세주소~~</p>
           </div>
 
-          <div class="form_group">
-            <label>사물함 사이즈*</label>
-            <select>
-              <option value="">사이즈를 선택해 주세요</option>
-              <option>S</option>
-              <option>M</option>
-              <option>L</option>
-              <option>XL</option>
-            </select>
-            <p class="label">필수 입력 사항 입니다.</p>
-          </div>
-
-          <div class="form_group">
-            <label>대여 장소*</label>
-            <input type="text" placeholder="지번 및 주소를 입력해주세요" />
-            <p class="label">대여장소를 선택해 주세요</p>
-          </div>
-
-          <div class="form_group">
-            <label>예약 날짜*</label>
-            <input type="date" />
-            <p class="label">날짜를 입력하세요</p>
-          </div>
-
-             <button type="submit" class="btn primary full">이용동의</button>
+             <button type="submit" class="btn primary full" @click="goToLogin">입력 완료</button>
         </div>
       </form>
     </div>
@@ -122,6 +66,27 @@ const goToLogin = () => {
 </script>
 
 <style scoped lang="scss">
+.title-wrap{
+display: flex;
+
+  
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
+    background: transparent;
+    font-size: 14px;
+    // padding: 10px 4px;
+    outline: none;
+    color: #333;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-bottom: 1px solid #53b4a1;
+    }
+  
+
+}
+
 /* ✅ 전체 페이지 구조 */
 .join-page {
   min-height: 100vh;
@@ -135,6 +100,7 @@ const goToLogin = () => {
 
 /* ✅ 상단 헤더 */
 .header {
+  height: 200px;
   position: relative;
   width: 100%;
   background: #53b4a1;
@@ -180,7 +146,7 @@ const goToLogin = () => {
 .join-card {
   background: #fff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-  border-radius: 10px;
+  // border-radius: 4px;
   padding: 50px 60px;
   width: 500px;
   position: relative;
@@ -331,6 +297,32 @@ const goToLogin = () => {
     background: #449b8a;
   }
 }
+.gapp{
+  height: 6px;
+}
+// ========================라인으로 ============
+.title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 30px 0 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e7e7e7;   // ✅ 기존 입력라인과 동일한 색상
+  width: 100%;
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+  }
+
+  .label {
+    font-size: 12px;
+    color: #888;
+  }
+}
+
 
 /* ✅ 반응형 */
 @media (max-width: 600px) {

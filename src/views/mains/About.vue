@@ -57,30 +57,28 @@ const services = [
   display: flex;
   justify-content: center;
   font-family: "Pretendard", "Inter", sans-serif;
+  @media (max-width: 1080px) {
+    text-align: center;
+  }
   @media (max-width: 390px) {
-    padding: 80px 0 0px;
+    padding-top: 100px;
   }
   .inner {
-    // display: flex;
-    // align-items: flex-start;
-    // justify-content: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     gap: 80px;
     max-width: 1320px;
     width: 100%;
     padding: 0 40px;
 
-    @media (max-width: 1080px) {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 60px;
+    @media (max-width: 1386px) {
+      display: block;
     }
   }
 
   .left {
-    // flex: 0 0 340px;
-    text-align: center;
-    padding: 5% 0;
+    flex: 0 0 340px;
 
     h2 {
       font-size: clamp(24px, 2.5vw, 35px);
@@ -101,21 +99,25 @@ const services = [
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 34px;
-    justify-content: center;
-    justify-items: center;
-
+    @media (max-width: 1358px) {
+      padding-top: 5%;
+    }
     @media (max-width: 1080px) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1fr);
       gap: 28px;
     }
-
-    @media (max-width: 700px) {
-      grid-template-columns: 1fr;
+    @media (max-width: 978px) {
+      display: block;
+      max-width: 290px;
+      margin: auto;
+    }
+    @media (max-width: 390px) {
+      padding-top: 50px;
     }
   }
 
   .card {
-    width: 290px;
+    max-width: 290px;
     // height: 200px;
     background: #fff;
     border: 1px solid #e8e8e8;
@@ -123,12 +125,13 @@ const services = [
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    justify-items: center;
+    align-items: center;
     text-align: center;
     padding: 32px 16px 28px;
     transition: all 0.3s ease;
-
+    @media (max-width: 978px) {
+      margin-top: 10px;
+    }
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
@@ -192,7 +195,9 @@ const services = [
   .branch-to-house img {
     max-height: 135px;
   }
-
+ @media (max-width: 978px) {
+     padding-bottom: 0;
+    }
   @media (max-width: 768px) {
     .card {
       width: 100%;

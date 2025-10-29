@@ -116,17 +116,25 @@
             <footer class="qna-foot">
               <!-- SVG → 이모지 -->
               <button class="like" :class="{ on: q.liked }" @click="toggleLike(q)">
-                <span class="emoji" aria-hidden="true">{{ q.liked ? '💗' : '🤍' }}</span>
+                <span class="emoji" aria-hidden="true">{{ q.liked ? '💖' : '🤍' }}</span>
                 <span class="num">{{ q.likes }}</span>
               </button>
-              <button class="cmt" @click="toggleComments(q)">
+              <!-- ▼ 변경: 열림 상태 표시 + ARIA -->
+              <button
+                class="cmt"
+                :class="{ on: q.open }"
+                @click="toggleComments(q)"
+                :aria-expanded="q.open"
+                :aria-controls="'cbox-' + q.id"
+              >
                 <span class="emoji" aria-hidden="true">💬</span>
                 <span>댓글</span>
                 <strong>{{ q.comments.length }}</strong>
               </button>
             </footer>
 
-            <div v-if="q.open" class="cbox">
+            <!-- ▼ 변경: id 연결 -->
+            <div v-if="q.open" class="cbox" :id="'cbox-' + q.id">
               <ul class="cmt-list" v-if="q.comments.length">
                 <li v-for="(c, i) in q.comments" :key="i" class="cmt-item">
                   <div class="cmeta">
@@ -324,7 +332,7 @@ const captions = [
 const photoExpanded = ref(false)
 const collapsedHeight = ref(0)
 const gridRef = ref(null)
-const GRID_GAP_PX = 10      // .photo-grid gap과 동일하게 유지
+const GRID_GAP_PX = 10
 
 function calcCollapsedHeight() {
   const grid = gridRef.value
@@ -332,9 +340,9 @@ function calcCollapsedHeight() {
   const firstItem = grid.querySelector('.ph')
   if (!firstItem) return
   const rect = firstItem.getBoundingClientRect()
-  const cell = rect.width         // 정사각형이라 높이 = 너비
+  const cell = rect.width
   const rows = 2.5
-  const gaps = GRID_GAP_PX * 2    // 2.5줄이면 사이 간격은 2개
+  const gaps = GRID_GAP_PX * 2
   collapsedHeight.value = cell * rows + gaps
 }
 function expandPhotos() {
@@ -392,11 +400,11 @@ onBeforeUnmount(() => {
   margin: 0 auto; display: flex; align-items: center; justify-content: center;
   gap: clamp(16px, 5vw, 90px); padding: clamp(20px, 3vw, 32px) 0; position: relative; z-index: 2;
 }
-.wb-copy { color: #111; text-align: left; display: grid; gap: 8px; margin-top: 2.5%; }
-.eyebrow { margin: 0; font-size: clamp(12px, .95vw, 14px); color: rgba(0,0,0,.65); }
+.wb-copy { color: #111; text-align: left; display: grid; gap: 8px; margin-top: 2%; }
+.eyebrow { margin: 0; font-size: clamp(16px, 2vw, 20px); color: rgba(0,0,0,.65); }
 .eyebrow strong { font-weight: 800; }
 .wb-headline { margin: 0; font-weight: 900; line-height: 1.2; letter-spacing: -0.02em; font-size: clamp(25px, 3.2vw, 44px); }
-.wb-sub { margin: 2px 0 0; color: rgba(0,0,0,.7); font-size: clamp(12px, 1vw, 16px); }
+.wb-sub { margin: 2px 0 0; color: rgba(0,0,0,.7); font-size: clamp(14px, 2vw, 18px); font-weight: 500; }
 
 /* 포스터 영역 */
 .wb-poster { flex: 0 0 auto; width: clamp(140px, 18vw, 240px); aspect-ratio: 3/5; display: grid; place-items: center; }
@@ -503,7 +511,7 @@ onBeforeUnmount(() => {
   height: 32px;
   padding: 0 10px;
   font-size: 13px;
-  line-height: 1;               /* baseline 이슈 제거 */
+  line-height: 1;
   border: 1px solid #E5E7EB;
   background: #fff;
   border-radius: 8px;
@@ -511,7 +519,17 @@ onBeforeUnmount(() => {
 }
 .like.on { color: #E11D48; border-color: #FECACA; background: #FEF2F2; }
 
-/* 이모지 크기/정렬 살짝 보정 */
+/* 댓글 토글 on 상태 표시 */
+.cmt { transition: background .15s ease, border-color .15s ease, color .15s ease; }
+.cmt.on {
+  color: #0EA5E9;
+  border-color: #BAE6FD;
+  background: #F0F9FF;
+  box-shadow: 0 0 0 2px rgba(186,230,253,.35) inset;
+}
+.cmt.on .emoji { transform: translateY(1px) scale(1.1); }
+
+/* 이모지 크기/정렬 보정 */
 .like .emoji, .cmt .emoji {
   font-size: 16px;
   line-height: 1;
@@ -545,7 +563,7 @@ onBeforeUnmount(() => {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-content: center;
-  overflow: hidden;                /* 높이 제한 시 아래는 잘림 */
+  overflow: hidden;
   transition: max-height .25s ease;
 }
 @media (max-width: 600px){
@@ -591,7 +609,7 @@ onBeforeUnmount(() => {
   display: inline-grid;
   gap: 0;
   width: fit-content;
-  max-width: calc(min(92vw, 1100px) * 0.667); /* 2/3 크기 */
+  max-width: calc(min(92vw, 1100px) * 0.667);
   justify-items: stretch;
 }
 .lb-stage img{

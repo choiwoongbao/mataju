@@ -10,7 +10,12 @@
     <!-- Desktop Menu -->
     <div class="menu">
       <router-link class="dropdown" to="/information">이용안내</router-link>
-      <router-link class="dropdown" to="/reservation">예약하기</router-link>
+      <router-link class="dropdown" to="/reservation">예약하기
+           <ul class="submenu">
+          <li><router-link to="/reservation">예약하기</router-link></li>
+          <li><router-link to="/changereserv">예약변경</router-link></li>
+        </ul>
+      </router-link>
       <router-link to="/promotion">프로모션</router-link>
       <router-link class="dropdown" to="/community">커뮤니티</router-link>
       <router-link class="dropdown" to="/support">고객센터</router-link>
@@ -24,7 +29,7 @@
     <div class="nav-right">
       <div class="login-mini">
         <router-link to="/login">로그인</router-link>
-        <router-link to="/signup">예약 확인</router-link>
+        <router-link to="/findreserv">예약 확인</router-link>
       </div>
 
       <button
@@ -110,7 +115,8 @@ watch(isOpen, (open) => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use "/src/assets/style/variables" as *;
 /* ====== 헤더 높이 변수 (필요시만 조정) ====== */
 :root { --nav-h: 76px; }
 @media (max-width: 768px){ :root { --nav-h: 64px; } }
@@ -139,7 +145,7 @@ watch(isOpen, (open) => {
   width: auto;
   font-size: clamp(30px, 3vw, 38px);
   font-weight: 600;
-  color: #028587;
+  color: $color_main;
   white-space: nowrap;
   text-decoration: none;
 }
@@ -155,7 +161,7 @@ watch(isOpen, (open) => {
 /* 타이틀 메뉴: 600 */
 .menu > a,
 .menu > .dropdown {
-  color: #000;
+  color: #333;
   font-weight: 600;
   text-decoration: none;
   padding: 5px 10px;
@@ -163,7 +169,7 @@ watch(isOpen, (open) => {
   font-size: clamp(15px, 2vw, 22px);
 }
 .menu > a:hover,
-.menu > .dropdown:hover { color: #028587; }
+.menu > .dropdown:hover { color: $color_main_deep; }
 
 .login { padding-left: 2vw; }
 .login a {
@@ -171,18 +177,33 @@ watch(isOpen, (open) => {
   font-size: clamp(12px, 1vw, 16px);
   text-decoration: none;
 }
-.login > a:hover { color: #028587; font-weight: 500; }
+.login > a:hover { color: $color_main; font-weight: 500; }
 
 /* ====== Desktop dropdown ====== */
-.dropdown { position: relative; display: inline-flex; align-items: center; }
-.dropdown .submenu {
+.dropdown { 
+  position: relative; 
+  display: inline-flex; 
+  align-items: center; }
+
+  .dropdown .submenu {
   display: none;
   position: absolute;
-  top: 100%; left: 50%; transform: translateX(-50%);
-  margin-top: -2px; padding: 6px; border: 1px solid #ddd; border-radius: 10px;
-  min-width: 160px; width: auto; background: #fff; z-index: 10001;
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  top: 100%; left: 50%; 
+  transform: translateX(-50%);
+  margin-top: -2px; 
+  padding: 6px; 
+  // border: 1px solid #ddd; 
+  border-radius: 4px;
+  min-width: 160px; 
+  width: auto; 
+  background: #fff; 
+  z-index: 10001;
   text-align: center;
+  // box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  // 추가 
+   background: rgba($color_main, 0.005); /* 메인색 10% 투명 */
+  backdrop-filter: blur(30px);
+
 }
 .dropdown:hover .submenu { display: block; }
 .submenu li { padding: 0; }
@@ -190,19 +211,20 @@ watch(isOpen, (open) => {
   display: block;
   padding: 12px 24px;
   line-height: 1.4;
-  color: #000;
+  color: #333;
   text-decoration: none;
+  font-size: 16px;
   font-weight: 400;
   white-space: nowrap;
   word-break: keep-all;
 }
-.submenu li a:hover { color: #028587; }
+.submenu li a:hover { color:$color_main_deep; }
 
 /* ====== Mobile Top Right ====== */
 .nav-right { display: none; align-items: center; gap: 14px; }
 .login-mini { display: flex; align-items: center; gap: 12px; }
 .login-mini a { color: #6f6f6f; font-size: 16px !important; text-decoration: none; }
-.login-mini a:hover { color: #028587; }
+.login-mini a:hover { color: $color_main; }
 
 /* Hamburger */
 .hamburger {
@@ -247,17 +269,17 @@ watch(isOpen, (open) => {
 .m-title-btn {
   width: 100%;
   display: flex; align-items: center; justify-content: space-between;
-  font-size: 20px; font-weight: 700; color: #028587;
+  font-size: 20px; font-weight: 700; color: $color_main;
   background: transparent; border: 0; padding: 6px 0; cursor: pointer; text-align: left;
 }
 .chev { transition: transform .2s ease; display: inline-block; }
 .chev.open { transform: rotate(180deg); }
 .m-title.link-title {
-  font-size: 20px; font-weight: 700; color: #028587; text-decoration: none; padding: 6px 0; display: inline-block;
+  font-size: 20px; font-weight: 700; color: $color_main; text-decoration: none; padding: 6px 0; display: inline-block;
 }
 .sublist { overflow: hidden; display: grid; gap: 8px; margin-left: 8px; padding: 4px 0 8px; }
-.sublist a { font-size: 17px; color: #111; text-decoration: none; line-height: 1.7; }
-.sublist a:hover { color: #028587; }
+.sublist a { font-size: 17px; color: #333; text-decoration: none; line-height: 1.7; }
+.sublist a:hover { color: $color_main_deep; }
 
 /* 트랜지션 */
 .acc-enter-from, .acc-leave-to { max-height: 0; opacity: 0; }

@@ -161,7 +161,7 @@ const goToHome = () => {
   display: flex;
   flex-direction: column;
   align-items: center; /* Stepper + 카드 중앙 정렬 */
-  padding: 40px 0;
+ padding: 40px 0 80px 0;
 }
 
 //====공통================
@@ -169,10 +169,12 @@ const goToHome = () => {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); // ✔ hover 시에도 변하지 않는 그림자
-  padding: 30px 40px;
   border: 1px solid #fff; // ✔ hover 시 재렌더링 흔들림 방지
   position: relative;
-  width: 600px;
+  width: 100%;           /* ✅ 부모 크기에 따라 자동 줄어듦 */
+  max-width: 600px;      /* ✅ 최대 600px까지만 넓어짐 */
+  padding: 30px 5vw;     /* ✅ 좌우 여백을 뷰포트 기준으로 유동화 */
+  box-sizing: border-box; /* ✅ padding 포함 계산 */
 
   /* 상단 색상바 (브랜드 컬러) */
   &::before {
@@ -188,9 +190,24 @@ const goToHome = () => {
   .card_header h3 {
     font-size:$text-md;
     font-weight: 600;
-    color: #222;
+    color: #333;
     margin: 0 0 15px;
   }
+  @media (max-width: 768px) {
+  .form_card {
+    max-width: 90%;      /* ✅ 화면 거의 가득 */
+    padding: 24px 20px;  /* ✅ 안쪽 여백 축소 */
+  }
+
+  .receipt_table td {
+    font-size: $label-sm; /* ✅ 표 글씨 조금 작게 */
+  }
+
+  .submit_btn {
+    width: 100%;          /* ✅ 버튼도 가로 전체로 */
+    max-width: none;
+  }
+}
 }
 
 // 결제완료
@@ -230,7 +247,7 @@ const goToHome = () => {
       }
 
       &.total td {
-        font-weight: 700;
+        font-weight: 500;
         color: #111;
 
         &:last-child {

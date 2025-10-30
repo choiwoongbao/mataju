@@ -128,7 +128,7 @@ onMounted(() => {
     },
     breakpoints: {
       1400: { slidesPerView: 3.1, spaceBetween: 40 },
-      1024: { slidesPerView: 2.3, spaceBetween: 30 },
+      1024: { slidesPerView: 3.9, spaceBetween: 30 },
       768: { slidesPerView: 1.4, spaceBetween: 25 },
       490: { slidesPerView: 1.3, spaceBetween: 15 },
       0: { slidesPerView: 1, spaceBetween: 8 },
@@ -168,7 +168,7 @@ onMounted(() => {
 .title h1{
   font-weight: 700;
   font-size: clamp(26px, 2.8vw, 38px);
-  white-space: nowrap;
+  // white-space: nowrap;
 }
 
 .title h2{
@@ -275,20 +275,42 @@ onMounted(() => {
 }
 
 // ========반응형======490px 이하===============
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .comment {
-    font-size: $label-lg;
+    font-size: 1.5rem;
   }
   .review_wrap {
   padding: $title-big-gap-large;
   overflow: hidden;
   padding-top: 60px;
 }
+.img_wrap img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 6px;
 }
-@media (max-width: 490px) {
+}
+@media (max-width: 768px) {
   .comment {
-    font-size: $label-sm;
+    font-size: 1rem;
   }
+  .review_wrap {
+  padding: $title-big-gap-large;
+  overflow: hidden;
+  padding-top: 60px;
+}
+.img_wrap img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+}
+@media (max-width: 450px) {
+ 
   .review_card {
     max-width: 90%;
     min-height: 300px;
@@ -300,6 +322,13 @@ onMounted(() => {
   padding: $title-big-gap-large;
   overflow: hidden;
   padding-top: 100px;
+}
+.img_wrap img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 6px;
 }
 }
 </style>

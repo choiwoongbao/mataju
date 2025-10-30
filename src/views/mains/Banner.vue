@@ -17,7 +17,7 @@
               <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
             </div>
             <div class="main-banner-img">
-              <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
+              <img src="/public/images/mains/banner/bannerimg1.png" alt="mainbannerimg" />
             </div>
           </div>
         </swiper-slide>
@@ -29,6 +29,20 @@
               <h1 class="mb-txt1">안전한 보관</h1>
               <h2 class="mb-txt2">전문가의 안심 관리</h2>
               <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
+            </div>
+            <div class="main-banner-img">
+              <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
+            </div>
+          </div>
+        </swiper-slide>
+
+        <!-- side 3 -->
+<swiper-slide>
+          <div class="banner-grid">
+            <div class="main-banner-txt">
+              <h1 class="mb-txt1">가벼운 여행</h1>
+              <h2 class="mb-txt2">답답한 짐 없이, 편리하게</h2>
+              <h3 class="mb-txt3">당일 접수/보관도 가능합니다.</h3>
             </div>
             <div class="main-banner-img">
               <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />

@@ -312,7 +312,7 @@ watch(isOpen, (open) => {
 }
 
 /* ≥768px: 네 코드 유지 */
-@media (min-width: 767px) {
+@media (min-width: 769px) {
   .nav-right { display: flex; align-items: center; gap: 14px; }
   .hamburger { display: none; }
   .login { display: none; }

@@ -21,7 +21,25 @@
       </form>
 
       <div class="social-login">
-        <button class="naver"><i class="fa-brands fa-naver"></i></button>
+       <button class="naver" aria-label="네이버 로그인">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="30"
+    viewBox="0 0 600 500"
+  >
+    <!-- 단색 초록 원 -->
+    <!-- <circle cx="256" cy="256" r="256" fill="#03C75A" /> -->
+    <!-- 중앙 정렬 흰색 N -->
+    <path
+      fill="#ffffff"
+      d="M176 128h88l72 112V128h88v256h-88l-72-112v112h-88V128z"
+    />
+  </svg>
+</button>
+
+
+
         <button class="kakao"><i class="fa-solid fa-comment"></i></button>
         <button class="google"><i class="fa-brands fa-google"></i></button>
       </div>
@@ -41,7 +59,7 @@
     가벼운 여행을 시작해 보세요!
   </p>
 </div>
-<div>blank</div>
+<!-- <div>blank</div> -->
         </div>
         <div class="coupon-card">
           <img src="/public/images/sign/Login_cupon.png" alt="쿠폰" />
@@ -50,7 +68,7 @@
       </div>
     </div>
   </div>
-<FindResarv/>
+<!-- <FindResarv/> -->
     <!-- ✅ 모달 삽입 -->
     <FindIDModal v-if="showFindId" @close="showFindId = false" />
     <FindPwModal v-if="showFindPw" @close="showFindPw = false" />
@@ -95,10 +113,10 @@ const handleLogin = () => {
   }
 }
 .title-bg{
-background-color: #2db400;
+// background-color: #2db400;
 }
 .scr-bg{
-  background-color: #ffe812;
+  // background-color: #ffe812;
   display: inline-block;
 
 }
@@ -107,16 +125,18 @@ background-color: #2db400;
   display: flex;
   justify-content: center;
   align-items: stretch; /* 좌우 높이 동일하게 */
-  min-height: 100vh;
+  min-height: 60vh;
   max-width: 1120px;
   gap: 2.5rem;
   margin: 0 auto;
+  margin-bottom: 40px;
   gap: 0; /* 카드 사이 여백 조정 가능 */
 
   /* ✅ 반응형 (900px 이하일 때 1열 전환) */
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: center;
+     min-height: 100vh;
   }
 }
 
@@ -248,8 +268,9 @@ background-color: #2db400;
 /* 배너 내용 */
 .coupon-banner {
   width: 100%;
-  background: url(/public/images/sign/2462865.png) no-repeat center center;
- 
+  background: 
+    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), /* 위에 흐린 흰색 필터 */
+    url(/public/images/sign/2462865.png) no-repeat center center / cover;
   padding: 40px;
   border-radius: 6px;
   border: 1px solid #e7e7e7;
@@ -302,5 +323,19 @@ background-color: #2db400;
       opacity: 0.7;
     }
   }
+}
+
+@media (max-width:480px) {
+  .coupon-banner {
+  width: 100%;
+  background: 
+    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), /* 위에 흐린 흰색 필터 */
+    url(/public/images/sign/2462865.png) no-repeat center center / cover;
+  padding: 40px;
+  border-radius: 6px;
+  border: 1px solid #e7e7e7;
+  text-align: center;
+  max-width: 320px;
+  background-color: #fff;}
 }
 </style>

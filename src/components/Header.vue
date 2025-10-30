@@ -271,7 +271,7 @@ watch(isOpen, (open) => {
   .menu { gap: 10px; }
   .login { padding-left: 0; }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .menu { display: none; }
   .nav-right { display: flex; }
   .logo { font-size: 28px; }

@@ -346,13 +346,13 @@ function openMapModal() {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1000;  padding-top: 5%;
 }
 
 .modal-content {
   width: 80vw;
   max-width: 1200px;
-  height: 80vh;
+  height:60vh;
   background: white;
   border-radius: 12px;
   display: flex;
@@ -605,8 +605,8 @@ function openMapModal() {
 /* ✅ 반응형 수정 버전 */
 @media (max-width: 1024px) {
   .modal-content {
-    width: 98vw;
-    height: 85vh;
+     width: 70vw;
+    height: 50vh;
   }
 
   .location-selection-section {
@@ -673,7 +673,7 @@ function openMapModal() {
 
   .location-selection-section {
     width: 100%;
-    /* height: 45%; */
+    height: 45%;
     border-right: none;
     border-bottom: 1px solid #eee;
     padding: 12px;

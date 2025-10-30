@@ -3,10 +3,10 @@
 <!-- ==================================================== -->
  <div class="join-page">
     <!-- ✅ 상단 영역 -->
-    <header class="header">
-      <div class="logo left">로고</div>
+     <header class="header">
+      <div class="logo left"><img src="/public/images/mains/header/logo-1.png" alt="로고"></div>
       <h1>회원가입</h1>
-      <div class="logo right">로고</div>
+      <div class="logo right"><img src="/public/images/mains/header/logo-1.png" alt="로고"></div>
     </header>
 
     <!-- ✅ 메인 카드 -->
@@ -89,7 +89,7 @@ display: flex;
 
 }
 
-/* ✅ 전체 페이지 구조 */
+/* 전체 페이지 구조 */
 .join-page {
   min-height: 100vh;
   background: #f5f7f7;
@@ -99,26 +99,42 @@ display: flex;
   position: relative;
   z-index: 0;
 }
-
-/* ✅ 상단 헤더 */
+/*  상단 헤더 */
 .header {
-  height: 200px;
   position: relative;
+  height: 260px; /* ✅ 기존 200px → 약간 더 여유있게 */
   width: 100%;
-  background: $color_main;
-  color: #fff;
+  background: #f5f7f7;
+  overflow: hidden;
   text-align: center;
-  padding: 50px 0;
+  padding: 70px 0;
   z-index: 1;
 
   h1 {
-    font-size: 26px;
-    font-weight: 700;
-    margin: 0;
     position: relative;
     z-index: 2;
+    color: #333;
+    font-size: 26px;
+    font-weight: 700;
   }
 
+  /*  워터마크 로고 패턴 배경 */
+  &::before {
+  content: "";
+  position: absolute;
+  inset: -80px 0;
+  background-image: url("/images/mains/header/logo-1.png");
+  background-repeat: no-repeat; /* ✅ 반복 제거 */
+  background-position: center;
+  background-size: 1600px auto; /* ✅ 가로로 길게 */
+  opacity: 0.05; /* ✅ 더 은은하게 */
+  transform: rotate(-18deg) scale(1.1); /* ✅ 자연스러운 기울기 */
+  transform-origin: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+  /*  헤더 좌우에 보조 로고 박스 유지 */
   .logo {
     position: absolute;
     top: 50%;
@@ -144,7 +160,7 @@ display: flex;
   }
 }
 
-/* ✅ 회원가입 카드 */
+/*  회원가입 카드 */
 .join-card {
   background: #fff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
@@ -161,7 +177,7 @@ display: flex;
   }
 }
 
-/* ✅ 라인형 입력 폼 */
+/*  라인형 입력 폼 */
 .form_group {
   margin-bottom: 25px;
 

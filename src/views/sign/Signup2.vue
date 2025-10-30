@@ -99,55 +99,42 @@ display: flex;
   position: relative;
   z-index: 0;
 }
-/*  상단 헤더 */
+//*  상단 헤더 */
 .header {
   position: relative;
-  height: 260px; /* ✅ 기존 200px → 약간 더 여유있게 */
+  height: 200px;
   width: 100%;
-  background: #f5f7f7;
+  background: #59B5B3; /* 단색 배경 */
   overflow: hidden;
   text-align: center;
   padding: 70px 0;
   z-index: 1;
 
+  /* 회원가입 텍스트 복구 + 명확한 색상 */
   h1 {
     position: relative;
-    z-index: 2;
-    color: #333;
-    font-size: 26px;
+    z-index: 3;             /* 로고보다 위로 */
+    color: #fff;            
+    font-size: 28px;
     font-weight: 700;
+    margin: 0;
   }
 
-  /*  워터마크 로고 패턴 배경 */
-  &::before {
-  content: "";
-  position: absolute;
-  inset: -80px 0;
-  background-image: url("/images/mains/header/logo-1.png");
-  background-repeat: no-repeat; /* ✅ 반복 제거 */
-  background-position: center;
-  background-size: 1600px auto; /* ✅ 가로로 길게 */
-  opacity: 0.05; /* ✅ 더 은은하게 */
-  transform: rotate(-18deg) scale(1.1); /* ✅ 자연스러운 기울기 */
-  transform-origin: center center;
-  z-index: 0;
-  pointer-events: none;
-}
-
-  /*  헤더 좌우에 보조 로고 박스 유지 */
+ 
   .logo {
     position: absolute;
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
-    background: rgba(255, 255, 255, 0.4);
-    color: #333;
     width: 70px;
     height: 70px;
-    line-height: 70px;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 4px;
     z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      opacity: 0.12; /* ✅ 아주 은은하게 (너무 눈에 띄지 않게) */
+      object-fit: contain;
+    }
 
     &.left {
       left: 80px;
@@ -155,7 +142,6 @@ display: flex;
 
     &.right {
       right: 80px;
-      background: rgba(255, 255, 255, 0.6);
     }
   }
 }

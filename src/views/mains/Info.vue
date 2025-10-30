@@ -112,7 +112,7 @@ const IMG_SAME  = "/public/images/mains/info/delivery-same.png";
 const IMG_OTHER = "/public/images/mains/info/delivery-other.png";
 
 /* 탭 & (보관)캐러셀 상태 */
-const activeTab = ref("delivery"); // 필요시 'storage'로 변경
+const activeTab = ref("storage"); // 필요시 'storage'로 변경
 const vw = ref(typeof window !== "undefined" ? window.innerWidth : 1920);
 const onResize = () => (vw.value = window.innerWidth);
 onMounted(() => window.addEventListener("resize", onResize));

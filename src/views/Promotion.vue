@@ -1,6 +1,6 @@
 <template>
   <div class="promo-banner">
-    <!-- <img src="/images/promotion/promobanner.png" alt="promotion banner" /> -->
+    <img src="/public/images/promotion/welcome.png" alt="welcome event" />
   </div>
   <div class="promo-inner">
     <div class="promo-benefit">
@@ -249,24 +249,74 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import "/src/assets/style/variables";
+@use "/src/assets/style/variables" as *;
 
 /* ===== 공통 ===== */
 .promo-inner {
   width: 100%;
 }
+
+.promo-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+/* 풍선 ‘통통’ 애니메이션 */
+.promo-banner img {
+  animation: balloon-bounce 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 호버 시 살짝 빠르게 */
+.promo-banner:hover img {
+  animation-duration: 1.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-banner img {
+    animation: none;
+  }
+}
+
+/* 키프레임: 위로 튀고 내려오며 찌그러짐(스쿼시) */
+@keyframes balloon-bounce {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  20% {
+    transform: translateY(-14px) scale(0.98, 1.02);
+  } /* 위로 살짝 늘어남 */
+  40% {
+    transform: translateY(0) scale(1.04, 0.96);
+  } /* 바닥에서 찌그러짐 */
+  60% {
+    transform: translateY(-8px) scale(0.99, 1.01);
+  } /* 잔반동 */
+  80% {
+    transform: translateY(0) scale(1.02, 0.98);
+  } /* 한 번 더 스쿼시 */
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
 .promo-benefit {
   text-align: center;
 }
 
 .promo-title h1 {
-  margin-top: 100px;
   color: #000;
   font-size: clamp(30px, 5vw, 50px);
   font-weight: 500;
+  margin-top: 50px;
 }
 .promo-title h2 {
-  color: #028587;
+  color: #3e9c9b;
   font-size: clamp(30px, 5vw, 40px);
   font-weight: 700;
 }
@@ -310,11 +360,11 @@
 }
 .fit-title > h1 {
   font-size: $title-sm;
-  color: #028587;
+  color: #3e9c9b;
   font-weight: 600;
 }
 .emoji {
-  color: #028587;
+  color: #3e9c9b;
   width: 28px;
   height: 28px;
   display: block;
@@ -377,10 +427,10 @@
 .detail-title > h1 {
   font-size: $quote;
   font-weight: 400;
-  color: #028587;
+  color: #3e9c9b;
 }
 .detail-title .emoji {
-  color: #028587;
+  color: #3e9c9b;
   width: 28px;
   height: 28px;
 }
@@ -444,7 +494,7 @@
 }
 
 .detail-benefit:nth-of-type(3) strong {
-  color: #028587;
+  color: #3e9c9b;
   font-weight: 700;
 }
 .detail-benefit:nth-of-type(3) p {
@@ -462,7 +512,7 @@
 .promo-inner > .detail-benefit:nth-of-type(4) .detail-txt3 {
   font-size: clamp(30px, 2vw, 38px);
   font-weight: 700;
-  color: #028587;
+  color: #3e9c9b;
   line-height: 1.2;
 }
 .promo-inner > .detail-benefit:nth-of-type(4) p {
@@ -471,7 +521,7 @@
   font-size: 13px;
 }
 .promo-inner > .detail-benefit:nth-of-type(4) strong {
-  color: #028587;
+  color: #3e9c9b;
 }
 
 .promo-inner > .detail-benefit:nth-of-type(5) .detail-txt2 {
@@ -482,7 +532,7 @@
   font-size: clamp(13px, 2vw, 16px);
 }
 .promo-inner > .detail-benefit:nth-of-type(5) strong {
-  color: #028587;
+  color: #3e9c9b;
 }
 .review-grid {
   width: 100%;
@@ -516,7 +566,7 @@
   display: block;
   font-size: 18px;
   font-weight: 700;
-  color: #028587;
+  color: #3e9c9b;
 }
 .review-note {
   font-size: 14px;
@@ -563,8 +613,8 @@
 }
 
 .app-txt button {
-  background-color: #028587;
-  color: #fff1;
+  background-color: #3e9c9b;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
@@ -636,7 +686,9 @@
     height: auto;
     margin: 0 auto;
   }
-  .pro-app{padding: 25px 180px;}
+  .pro-app {
+    padding: 25px 180px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -708,7 +760,9 @@
   .review-grid {
     grid-template-columns: 1fr;
   }
-  .pro-app{padding: 25px 224px;}
+  .pro-app {
+    padding: 25px 224px;
+  }
 }
 
 @media (max-width: 768px) and (min-width: 601px) {
@@ -768,14 +822,28 @@
 }
 
 @media (max-width: 600px) {
-    .pro-app{padding: 25px 140px;}
+  .pro-app {
+    padding: 25px 140px;
+  }
 }
 
 @media (max-width: 390px) {
-  .app-img{width:280px; text-align: left};
-  .app-img img{width: 280px;}
-  .app-txt h2{font-size: 28px;}
-  .app-txt p{font-size: 13px;}
-  .app-txt button{font-size: 13px; padding: 10px 15px;}
+  .app-img {
+    width: 280px;
+    text-align: left;
+  }
+  .app-img img {
+    width: 280px;
+  }
+  .app-txt h2 {
+    font-size: 28px;
+  }
+  .app-txt p {
+    font-size: 13px;
+  }
+  .app-txt button {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
 }
 </style>

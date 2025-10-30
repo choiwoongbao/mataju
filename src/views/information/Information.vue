@@ -29,7 +29,7 @@
             <path
               d="M8 4l8 8-8 8"
               fill="none"
-              stroke="#028587"
+              stroke="#3e9c9b"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round" />
@@ -59,7 +59,7 @@
             <path
               d="M8 4l8 8-8 8"
               fill="none"
-              stroke="#028587"
+              stroke="#3e9c9b"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round" />
@@ -139,7 +139,6 @@ import Information3 from './Information3.vue';
 .info-guide {
   text-align: left;
   margin: 80px auto;
-
 }
 
 .info-head {
@@ -166,13 +165,13 @@ import Information3 from './Information3.vue';
   text-align: left;
 }
 .step-first {
-  color: #3A8C88;
+  color: #3e9c9b;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 2px;
 }
 .step-second {
-  color: #3A8C88;
+  color: #3e9c9b;
   font-weight: 700;
   font-size: 16px;
 }
@@ -195,6 +194,7 @@ import Information3 from './Information3.vue';
 .info-steps {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
   list-style: none;
@@ -218,7 +218,7 @@ import Information3 from './Information3.vue';
 .step-icon {
   width: 50px;
   height: 50px;
-  background-color: #3A8C88;
+  background-color:#3e9c9b;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -244,7 +244,7 @@ import Information3 from './Information3.vue';
   width: 22px;
   height: 22px;
   fill: none;
-  stroke: #3A8C88;
+  stroke: #3e9c9b;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -316,7 +316,7 @@ justify-content: center;
     padding: 0;
     gap: 8px;
   }
-
+.info-sub{font-size:16px;}
   .info-steps .step-card{
     max-width: none;
     padding: 18px 16px;
@@ -330,7 +330,7 @@ justify-content: center;
   }
   .info-steps .info-arrow svg{
     width: 20px; height: 20px;
-    stroke: #3A8C88;
+    stroke: #3e9c9b;;
   }
 
   .info-steps > :nth-child(4){

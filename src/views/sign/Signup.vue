@@ -78,33 +78,21 @@ const goToLogin = () => {
   position: relative;
   height: 200px;
   width: 100%;
-  background: #f5f7f7;
+  background: $color_main;
   overflow: hidden; // 기울어진 패턴이 튀어나오지 않게
   text-align: center;
   padding: 50px 0;
-  z-index: 1;
+  // z-index: 1;
 
   h1 {
     position: relative;
-    z-index: 2;
+    z-index: 999;
     color: #333;
     font-size: 26px;
     font-weight: 700;
   }
 
-  /*  기울어진 로고 패턴 (위아래 반복 강화) */
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -60px; /* ✅ 위아래로 더 확장해 자연스러운 패턴 */
-    background-image: url("/images/mains/header/logo-1.png");
-    background-repeat: repeat;
-    background-size: 140px 140px; /* ✅ 로고 크기 그대로 유지 */
-    opacity: 0.07;               /* ✅ 은은한 투명도 */
-    transform: rotate(-18deg) scale(1.6); /* ✅ 사선 반복 + 세로 확장 */
-    transform-origin: center center;
-    z-index: 0;
-  }
+ 
 }
 
 /* 회원가입 카드 */
@@ -262,7 +250,7 @@ const goToLogin = () => {
   }
 }
 
-/* 반응형 */
+/* ✅ 반응형 */
 @media (max-width: 600px) {
   .join-card {
     width: 90%;

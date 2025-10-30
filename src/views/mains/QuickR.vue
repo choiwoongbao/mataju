@@ -63,7 +63,7 @@
       </div>
 
       <!-- 3) 짐 크기/개수 -->
-      <div class="search-item" :class="{ active: openPanel === 'bags' }" @click="toggle('bags')">
+      <div class="search-item size-item" :class="{ active: openPanel === 'bags' }" @click="toggle('bags')">
         <label class="label">보관함 크기/개수</label>
         <input type="text" :value="bagsLabel" placeholder="어떤 짐을 보관하시나요?" readonly />
 
@@ -194,10 +194,10 @@ const dateLabel = computed(() =>
 const counters = reactive({ xs: 0, s: 0, m: 0, l: 0, xl: 0 });
 const bagRows = [
   { key: "xs", title: "XS", desc: "에코백,백팩,서류가방" },
-  { key: "s", title: "S", desc: "20~22인치 소형 캐리어" },
-  { key: "m", title: "M", desc: "23~25인치 중형 캐리어" },
-  { key: "l", title: "L", desc: "26~29인치 대형 캐리어" },
-  { key: "xl", title: "XL", desc: "특대형 캐리어 및 이사박스" },
+  { key: "s", title: "S", desc: "의류박스, 서랍형수납" },
+  { key: "m", title: "M", desc: "여행가방, 의류박스" },
+  { key: "l", title: "L", desc: "행거의류, 중형가전" },
+  { key: "xl", title: "XL", desc: "대형짐, 스포츠장비" },
 ];
 const inc = (k) => counters[k]++;
 const dec = (k) => counters[k] && counters[k]--;
@@ -295,8 +295,7 @@ const Calendar = defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.search-dock {
-}
+
 .search-dock > .search-bar {
   pointer-events: auto;
 }
@@ -307,7 +306,7 @@ const Calendar = defineComponent({
   border: 1.5px solid #e5e7eb;
   border-radius: 9999px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 12px 14px;
+  padding: 8px 14px;
   display: grid;
   align-items: center;
   grid-template-columns: 1.05fr 0.9fr 0.95fr auto;
@@ -341,17 +340,18 @@ const Calendar = defineComponent({
 }
 
 .label {
-  font-size: 13px;
+  font-size: clamp(14px, 1.5vw, 17px);
   font-weight: 700;
   color: #555353;
-  margin: 0 0 3px;
+  margin-top: 7px;
+  margin-bottom: 3px;
   line-height: 1;
   text-align: left;
 }
 input {
   border: none;
   outline: none;
-  font-size: 15px;
+    font-size: clamp(13px, 1.5vw, 15.5px);
   color: #b8b3b3;
   padding: 0;
   width: 100%;
@@ -666,12 +666,6 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
-  }
   .popover {
     left: 16px;
     right: 16px;
@@ -689,12 +683,7 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
-  }
+
   .popover {
     left: 16px;
     right: 16px;
@@ -712,12 +701,7 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
-  }
+ 
   .popover {
     left: 16px;
     right: 16px;
@@ -733,12 +717,6 @@ input::placeholder {
   }
   .search-item {
     padding: 12px 16px;
-  }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
   }
   .popover,
   .popover-dates,
@@ -760,19 +738,13 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
-  }
+
   .popover,
   .popover-dates,
   .popover-guests {
     max-width: 480px;
   }
 }
-
 @media (max-width: 1220px) {
   .search-dock {
     // top: 375px;
@@ -787,19 +759,13 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
-  }
+
   .popover,
   .popover-dates,
   .popover-guests {
     max-width: 380px;
   }
 }
-
 @media (max-width: 1180px) {
   .search-dock {
     // top: 360px;
@@ -814,68 +780,108 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-  .label {
-    font-size: 12px;
+
+}
+@media (max-width: 1150px) {
+  .search-bar {
+    padding: 10px 12px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.75fr) minmax(0, 0.85fr) auto;
+    column-gap: 6px;
   }
-  input {
-    font-size: 14px;
+  .search-item {
+    padding: 12px 14px;
+  }
+  .search-item input {
+    min-width: 0;       
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+
+// search 바 사이 before 
+  .search-item:not(:first-child)::before {
+    height: 50px;
+    top: 10px;
+    bottom: 8px;
+  }
+
+  .search-item .popover {
+    left: 0;
+    right: 0;      
+    width: auto;
+    max-width: none;  
+    border-radius: 18px;
+  }
+  .search-item .popover-guests {
+    min-width: 0;
+  }
+  .guest-row {
+    gap: 10px;
+  }
+  .guest-txt strong {
+    font-size: 16px;
+    // min-width: 30px;
+    margin-left: 10px;
+  }
+  .guest-txt small {
+    white-space: nowrap; 
   }
 }
 
-@media (max-width: 1115px) {
-  .search-dock {
-    // top: 345px;
-    // left: 50%;
-    // transform: translate(-50%);
-    width: calc(100% - 80px);
-  }
+@media (max-width: 1060px) {
   .search-bar {
-    padding: 10px 12px;
-    grid-template-columns: 0.7fr 0.6fr 0.7fr auto;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 0.6fr) auto;
+    column-gap: 4px;
   }
   .search-item {
-    padding: 12px 16px;
+    padding: 11px 12px;
   }
-  .label {
-    font-size: 12px;
+  .search-item:not(:first-child)::before {
+    height: 46px;
+    top: 8px;
   }
-  input {
-    font-size: 14px;
+  .search-item .popover {
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: none;
+  }
+  .search-item.size-item .popover,
+  .search-item.storage-item .popover { 
+    right: -70px;           
+    width: 330px;            
+  }
+  .dest-row{ padding: 5px 10px;}
+.dest-row small{font-size:10px;}
+  .guest-row {
+    gap: 8px;
+  }
+  .guest-txt strong {
+    font-size: 15px;
+    margin-left: 6px;
+  }
+}
+@media (max-width: 1055px) {
+  .dest-row small {
+    display: none;
   }
 }
 
-@media (max-width: 1000px) {
-  .search-dock {
-    // top: 320px;
-    // left: 50%;
-    // transform: translate(-50%);
-    width: calc(100% - 80px);
+@media (max-width: 970px) {
+  .search-item .popover {
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: none;
   }
-  .search-bar {
-    padding: 10px 12px;
-    grid-template-columns: 0.7fr 0.6fr 0.7fr auto;
-  }
-  .search-item {
-    padding: 12px 16px;
-  }
-  .label {
-    font-size: 12px;
-  }
-  input {
-    font-size: 14px;
+  .search-item.size-item .popover,
+  .search-item.storage-item .popover { 
+    right: -70px;           
+    width: 300px;            
   }
 }
 
-@media (max-width: 960px) {
-  .search-item {
-    min-height: 44px;
-    padding: 10px 12px;
-  }
-  .search-bar {
-    grid-template-columns: 0.7fr 0.6fr 0.7fr auto;
-  }
-}
-// ====================================
+
 @media (max-width: 850px) {
   .search-dock {
     // top: 310px;
@@ -895,7 +901,7 @@ input::placeholder {
     height: 46px;
   }
 }
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .search-dock {
     display: none;
   }

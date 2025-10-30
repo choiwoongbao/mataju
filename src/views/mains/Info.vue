@@ -160,7 +160,7 @@ function slideStyle() {
 
 /* 보관 캐러셀 */
 .info-main .carousel { position: relative; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: 12px; }
-.info-main .nav { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #e1e8e8; background: #fff; font-size: 26px; cursor: pointer; transition: all 0.15s ease; }
+.info-main .nav { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #e1e8e8; background: #fff; font-size: 26px; cursor: pointer; transition: all 0.15s ease; color: #555353;}
 .info-main .nav:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 .info-main .nav:disabled { opacity: 0.3; cursor: default; }
 .info-main .viewport { overflow: hidden; min-height: 280px; }

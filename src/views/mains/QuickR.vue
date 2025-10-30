@@ -366,7 +366,7 @@ input::placeholder {
   height: 50px;
   border: none;
   border-radius: 50%;
-  background: #028587;
+  background: #3e9c9b;
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -377,7 +377,7 @@ input::placeholder {
   transition: background 0.2s ease, transform 0.05s ease;
 }
 .search-btn:hover {
-  background: #028587;
+  background: #3A8C88;
 }
 .search-btn:active {
   transform: translateY(1px);
@@ -405,7 +405,7 @@ input::placeholder {
 .popover-header {
   font-weight: 700;
   padding: 8px 10px 14px;
-  color: #028587;
+  color: #3e9c9b;
 }
 .dest-list {
   display: flex;
@@ -548,11 +548,11 @@ input::placeholder {
 }
 :deep(.day.start),
 :deep(.day.end) {
-  background: #028587;
+  background: #3e9c9b;
   color: #000;
 } // 시작, 끝
 :deep(.day.inrange) {
-  background: #028587;
+  background: #3e9c9b;
 } // 구간(시작~끝 사이)
 :deep(.day.hovering) {
   background: #d8f1ea;
@@ -579,7 +579,7 @@ input::placeholder {
   padding: 10px 16px;
   border: none;
   border-radius: 12px;
-  background-color: #028587;
+  background-color: #3e9c9b;
   color: #fff;
   font-weight: 500;
   cursor: pointer;
@@ -609,7 +609,7 @@ input::placeholder {
 }
 .guest-txt strong {
   margin-left: 15px;
-  color: #028587;
+  color: #3e9c9b;
   font-size: 18px;
   font-weight: 700;
   display: inline-block;
@@ -941,7 +941,7 @@ font-size: 18px;
        .search-bar input {font-size:13px; margin-bottom:3px;}
        .popover-header{font-size: 16px; padding: 8px 10px 14px;}
        .dest-list{gap: 0;}
-.dest-texts strong{white-space: nowrap;}
+.dest-texts strong{white-space: nowrap; color: #000;}
 .dest-texts small{display: none;}
 
     

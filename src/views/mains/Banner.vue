@@ -101,7 +101,7 @@ import QuickR from "./QuickR.vue";
   }
   .main-banner-txt > *{ width:100%; margin-left:0; padding-left:0; text-indent:0; }
 
-  .mb-txt1{ font-size:clamp(16px, 3vw, 26px); color:#028587; font-weight:600; margin:0; }
+  .mb-txt1{ font-size:clamp(16px, 3vw, 26px); color:#3e9c9b; font-weight:600; margin:0; }
   .mb-txt2{ font-size:clamp(40px, 3.3vw, 64px); font-weight:800; color:#000; line-height:.7; margin:0; letter-spacing:-.02em; }
   .mb-txt3{ font-size:clamp(14px, 3vw, 20px); color:#000; font-weight:400; line-height:2; margin:0; }
 
@@ -127,7 +127,7 @@ import QuickR from "./QuickR.vue";
   }
   .main-banner-txt > *{ margin:0; padding:0; text-indent:0; }
 
-  .mb-txt1{ font-size:18px; color:#028587; font-weight:600; }
+  .mb-txt1{ font-size:18px; color:#3e9c9b; font-weight:600; }
   .mb-txt2{ font-size:34px; font-weight:800; color:#000; line-height:.7; }
   .mb-txt3{ font-size:16px; color:#000; font-weight:400; line-height:1.25; }
 

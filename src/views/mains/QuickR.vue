@@ -111,6 +111,9 @@
 
 <script setup>
 import { ref, reactive, computed, h, defineComponent } from "vue";
+import { useRouter } from "vue-router"; // ✅ 추가
+
+const router = useRouter(); // ✅ 라우터 사용
 
 /* 패널 열기/닫기 */
 const openPanel = ref(null);
@@ -215,14 +218,9 @@ const bagsLabel = computed(() => {
   return p.join(" · ");
 });
 
-/* 제출 (데모) */
+/* ✅ 제출 → /login 으로 이동 */
 function submit() {
-  console.log("검색 파라미터", {
-    destination: destination.value,
-    start: startDate.value && startDate.value.toISOString().slice(0, 10),
-    end: endDate.value && endDate.value.toISOString().slice(0, 10),
-    bags: { ...counters },
-  });
+  router.push("/login");
 }
 
 /* 로컬 Calendar */
@@ -335,23 +333,24 @@ const Calendar = defineComponent({
   background: #e5e7eb;
 }
 .search-item.active {
-  background: #f7f7f8;
+  background: transparent;
   z-index: 20;
+    transform: translateY(1px);
 }
 
 .label {
-  font-size: clamp(14px, 1.5vw, 17px);
+  font-size: clamp(16px, 1.5vw, 17px);
   font-weight: 700;
   color: #555353;
   margin-top: 7px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   line-height: 1;
   text-align: left;
 }
 input {
   border: none;
   outline: none;
-    font-size: clamp(13px, 1.5vw, 15.5px);
+    font-size: clamp(14.5px, 1.5vw, 15.5px);
   color: #b8b3b3;
   padding: 0;
   width: 100%;
@@ -804,7 +803,11 @@ input::placeholder {
     top: 10px;
     bottom: 8px;
   }
-
+  .search-item.size-item .popover,
+  .search-item.storage-item .popover { 
+    right: -70px;           
+    width: 380px;  
+  }
   .search-item .popover {
     left: 0;
     right: 0;      
@@ -867,7 +870,7 @@ input::placeholder {
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 980px) {
   .search-item .popover {
     left: 0;
     right: 0;
@@ -879,31 +882,82 @@ input::placeholder {
     right: -70px;           
     width: 300px;            
   }
-}
 
+.guest-ctrl{
+  gap: 5px;
+}
+}
 
 @media (max-width: 850px) {
-  .search-dock {
-    // top: 310px;
-    // left: 50%;
-    // transform: translate(-50%);
-    width: calc(100% - 80px);
-  }
-  .search-item {
-    min-height: 44px;
-    padding: 10px 12px;
-  }
-  .search-bar {
-    grid-template-columns: 0.7fr 0.6fr 0.7fr auto;
-  }
-  .search-btn {
-    width: 46px;
-    height: 46px;
-  }
-}
-@media (max-width: 767px) {
-  .search-dock {
+  .search-item:nth-child(2),
+  .search-item:nth-child(3) {
     display: none;
   }
+
+  .search-bar {
+    grid-template-columns: 1fr auto;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .search-item {
+    padding: 10px 14px;
+  }
+    .search-item:first-child .popover {
+    width: 95%; 
+    margin: 0 auto;
+    left: 10px;
+  }
+  .popover-header{
+font-size: 18px;
+  }
+    .dest-texts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dest-texts strong{font-size: 15px; }
+    .dest-texts small {
+    display: inline-block;
+    color: #a3a3a3;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
 }
+
+@media (max-width:768px) {
+      .search-item:first-child .popover {
+    width: 95%; 
+    margin: 0 auto;
+    left: 20px;
+  }
+}
+
+@media (max-width:390px) {
+  .search-bar{grid-template-columns: 1fr auto; width: 90%;  margin: 0 auto;}
+      .search-item{padding: 4px 20px;}
+      .label{font-size: 15px; }
+       .search-bar input {font-size:13px; margin-bottom:3px;}
+       .popover-header{font-size: 16px; padding: 8px 10px 14px;}
+       .dest-list{gap: 0;}
+.dest-texts strong{white-space: nowrap;}
+.dest-texts small{display: none;}
+
+    
+    .search-item:first-child .popover {
+      width: 120%;
+        margin: 0 auto ;
+        left: 5px;
+    }
+    .popover-dest{
+      padding: 8px;
+    }
+}
+
+// @media (max-width: 767px) {
+//   .search-dock {
+//     display: none;
+//   }
+// }
 </style>

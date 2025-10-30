@@ -489,7 +489,7 @@ onMounted(() => {
   display: block;
   font-size: 16px;
   font-weight: 700;
-  color: #6d4f2b;
+  color: #3e9c9b;
   margin-bottom: 8px;
 }
 .input{

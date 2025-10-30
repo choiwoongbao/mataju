@@ -156,7 +156,7 @@ const goToHome = () => {
 
 .inner {
   width: 100%;
-  max-width: 1120px; /* ✅ reservation2와 동일 폭 */
+  max-width: 1120px; 
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -168,13 +168,13 @@ const goToHome = () => {
 .form_card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); // ✔ hover 시에도 변하지 않는 그림자
-  border: 1px solid #fff; // ✔ hover 시 재렌더링 흔들림 방지
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); 
+  border: 1px solid #fff; 
   position: relative;
-  width: 100%;           /* ✅ 부모 크기에 따라 자동 줄어듦 */
-  max-width: 600px;      /* ✅ 최대 600px까지만 넓어짐 */
-  padding: 30px 5vw;     /* ✅ 좌우 여백을 뷰포트 기준으로 유동화 */
-  box-sizing: border-box; /* ✅ padding 포함 계산 */
+  width: 100%;           
+  max-width: 600px;      
+  padding: 30px 5vw;    
+  box-sizing: border-box; 
 
   /* 상단 색상바 (브랜드 컬러) */
   &::before {
@@ -195,16 +195,16 @@ const goToHome = () => {
   }
   @media (max-width: 768px) {
   .form_card {
-    max-width: 90%;      /* ✅ 화면 거의 가득 */
-    padding: 24px 20px;  /* ✅ 안쪽 여백 축소 */
+    max-width: 90%;      
+    padding: 24px 20px;  
   }
 
   .receipt_table td {
-    font-size: $label-sm; /* ✅ 표 글씨 조금 작게 */
+    font-size: $label-sm; 
   }
 
   .submit_btn {
-    width: 100%;          /* ✅ 버튼도 가로 전체로 */
+    width: 100%;         
     max-width: none;
   }
 }
@@ -282,7 +282,7 @@ const goToHome = () => {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s ease; /* 버튼만 부드럽게 */
+  transition: background 0.2s ease; 
 
   &:hover {
     background: $color_main_deep;

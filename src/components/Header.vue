@@ -73,7 +73,17 @@
             <router-link to="/information" class="m-title link-title" @click="close()">이용안내</router-link>
           </li>
           <li>
-            <router-link to="/reservation" class="m-title link-title" @click="close()">예약하기</router-link>
+                <button class="m-title-btn" @click="toggleSection('reserve')">
+      예약하기
+      <span class="chev" :class="{ open: section.reserve }">⌄</span>
+    </button>
+
+    <transition name="acc">
+      <ul v-show="section.reserve" class="sublist">
+        <li><router-link to="/reservation" @click="close()">예약하기</router-link></li>
+        <li><router-link to="/changereserv" @click="close()">예약변경</router-link></li>
+      </ul>
+    </transition>
           </li>
           <li>
             <router-link to="/promotion" class="m-title link-title" @click="close()">프로모션</router-link>
@@ -188,22 +198,19 @@ watch(isOpen, (open) => {
   .dropdown .submenu {
   display: none;
   position: absolute;
-  top: 100%; left: 50%; 
+  top: 100%;
+  left: 50%;
   transform: translateX(-50%);
-  margin-top: -2px; 
-  padding: 6px; 
-  // border: 1px solid #ddd; 
-  border-radius: 4px;
-  min-width: 160px; 
-  width: auto; 
-  background: #fff; 
+  margin-top: -2px;
+  padding: 8px 0;
+  border-radius: 10px;
+  min-width: 160px;
+  background: rgba(255, 255, 255, 0.8); /* ✅ 흰색 반투명 */
+  backdrop-filter: blur(12px);           /* ✅ 부드러운 유리효과 */
+  // box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   z-index: 10001;
   text-align: center;
-  // box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  // 추가 
-   background: rgba($color_main, 0.005); /* 메인색 10% 투명 */
-  backdrop-filter: blur(30px);
-
+  transition: all 0.2s ease; /* 부드러운 열림 */
 }
 .dropdown:hover .submenu { display: block; }
 .submenu li { padding: 0; }

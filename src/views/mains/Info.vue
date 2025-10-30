@@ -95,11 +95,11 @@ import { computed, onMounted, onBeforeUnmount, reactive, ref } from "vue";
 
 /* 보관 카드 */
 const baseStorage = [
-  { id: "mini",   label: "XS", meta: "소형 가전, 서류, 장난감",  price: "10,000원부터", img: "/public/images/mains/info/info-xs.png" },
-  { id: "small",  label: "S",  meta: "의류 박스, 서랍형 수납",    price: "17,000원부터", img: "/public/images/mains/info/info-s.png" },
-  { id: "medium", label: "M",  meta: "여행 가방, 의류 박스",      price: "23,000원부터", img: "/public/images/mains/info/info-m.png" },
-  { id: "large",  label: "L",  meta: "행거 의류, 중형 가전",      price: "29,000원부터", img: "/public/images/mains/info/info-l.png" },
-  { id: "xlarge", label: "XL", meta: "대형 짐, 스포츠 장비",      price: "35,000원부터", img: "/public/images/mains/info/info-xl.png" },
+  { id: "mini",   label: "XS", meta: "소형 가전, 서류, 장난감",  price: "10,000원부터", img: "/images/mains/info/info-xs.png" },
+  { id: "small",  label: "S",  meta: "의류 박스, 서랍형 수납",    price: "17,000원부터", img: "/images/mains/info/info-s.png" },
+  { id: "medium", label: "M",  meta: "여행 가방, 의류 박스",      price: "23,000원부터", img: "/images/mains/info/info-m.png" },
+  { id: "large",  label: "L",  meta: "행거 의류, 중형 가전",      price: "29,000원부터", img: "/images/mains/info/info-l.png" },
+  { id: "xlarge", label: "XL", meta: "대형 짐, 스포츠 장비",      price: "35,000원부터", img: "/images/mains/info/info-xl.png" },
 ];
 
 /* ===== 배송 썸네일: 이미지 경로만 사용 (SVG 제거) =====
@@ -108,8 +108,8 @@ const baseStorage = [
       public/images/mains/info/delivery-same.png
       public/images/mains/info/delivery-other.png
    필요하면 경로를 원하는 곳으로 바꿔도 됨. */
-const IMG_SAME  = "/public/images/mains/info/delivery-same.png";
-const IMG_OTHER = "/public/images/mains/info/delivery-other.png";
+const IMG_SAME  = "/images/mains/info/delivery-same.png";
+const IMG_OTHER = "/images/mains/info/delivery-other.png";
 
 /* 탭 & (보관)캐러셀 상태 */
 const activeTab = ref("storage"); // 필요시 'storage'로 변경
@@ -195,6 +195,7 @@ function slideStyle() {
   background: #fff;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0,0,0,.03);
+  margin-top: 30px;
 }
 
 /* 배송 썸네일: 보관 썸네일 높이와 동일 */

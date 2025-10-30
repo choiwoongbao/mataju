@@ -22,14 +22,18 @@
             <div class="phone-mock" aria-hidden="true">
               <div class="notch"></div>
               <div class="screen">
-                <span class="screen-brand">마타주</span>
+                
+                <img
+                  class="screen-logo"
+                  src="/images/mains/header/logo-1.png"
+                  alt="마타주 로고"
+                />
               </div>
             </div>
 
             <div class="copy">
               <h2 class="title"><strong>마타주</strong> 앱 <span>다운받기</span></h2>
               <p class="desc">심플하게, 가볍게 지금 경험해 보세요</p>
-
               <div class="store-btns">
                 <a class="store-btn store-btn--white" href="#">
                   <span class="store-left">
@@ -229,7 +233,6 @@ onBeforeUnmount(() => {
 .faq-main .phone-mock .notch{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:80px; height:18px; border-bottom-left-radius:10px; border-bottom-right-radius:10px; background:#3A8C88 ;}
 .faq-main .phone-mock .screen{ position:absolute; inset:18px; border-radius:20px; background:#ffffff; display:flex; align-items:center; justify-content:center;}
 .faq-main .screen-brand{ color:#3A8C88; font-weight:800; font-size:20px; background:#ffffff; padding:6px 12px; border-radius:999px; box-shadow:0 1px 6px rgba(0,0,0,.08);}
-
 /* 텍스트 */
 .faq-main .copy .title{ color:#ffffff; font-size:28px; font-weight:900; line-height:1.2; margin:0 0 10px;}
 .faq-main .copy .desc{ color:#eaf6f6; font-size:14px; line-height:1.6; margin:0 0 18px;}

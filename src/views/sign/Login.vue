@@ -186,7 +186,9 @@ const goGuestReserve = () => {
     font-weight: 600;
     padding: 14px 0;
     cursor: pointer;
+    font-size: 16px;
     transition: background 0.2s ease;
+  
 
     &:hover {
       background: $color_main_deep;
@@ -202,6 +204,8 @@ const goGuestReserve = () => {
     font-weight: 600;
     padding: 14px 0;
     cursor: pointer;
+        font-size: 16px;
+
     transition: background 0.2s ease;
 
     &:hover {

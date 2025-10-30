@@ -91,7 +91,7 @@ const openFindModal = () => {
 ========================================================= */
 .page-frame {
   /* ✅ 전체 프레임 */
-  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,10 +116,10 @@ const openFindModal = () => {
   width: 100%;
   max-width: 640px;
 
-  /* ✅ 높이 제한 + 자동 정렬 */
-  height: auto;
-  max-height: 600px;
-  overflow-y: auto;
+  // /* ✅ 높이 제한 + 자동 정렬 */
+  // height: 100%;
+  // max-height: 600px;
+  // overflow-y: auto;
 }
 
 /* =========================================================

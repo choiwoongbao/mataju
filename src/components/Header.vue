@@ -360,7 +360,7 @@ watch(isOpen, (open) => {
   line-height: 1;
 }
 .logo-img {
-  height: 2.2em;
+  height: 1.7em;
   width: auto;
   display: block;
   object-fit: contain;

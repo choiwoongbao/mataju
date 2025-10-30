@@ -22,14 +22,18 @@
             <div class="phone-mock" aria-hidden="true">
               <div class="notch"></div>
               <div class="screen">
-                <span class="screen-brand">마타주</span>
+                
+                <img
+                  class="screen-logo"
+                  src="/images/mains/header/logo-1.png"
+                  alt="마타주 로고"
+                />
               </div>
             </div>
 
             <div class="copy">
               <h2 class="title"><strong>마타주</strong> 앱 <span>다운받기</span></h2>
               <p class="desc">
-                지금, 유니크 리무버블.<br />
                 심플하게, 가볍게 지금 경험해 보세요
               </p>
 
@@ -230,8 +234,22 @@ onBeforeUnmount(() => {
 /* 폰 */
 .faq-main .phone-mock{ width:160px; height:320px; border-radius:26px; background:#fff; position:relative; border:2px solid #0f585a;}
 .faq-main .phone-mock .notch{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:80px; height:18px; border-bottom-left-radius:10px; border-bottom-right-radius:10px; background:#0f585a;}
-.faq-main .phone-mock .screen{ position:absolute; inset:18px; border-radius:20px; background:#ffffff; display:flex; align-items:center; justify-content:center;}
-.faq-main .screen-brand{ color:#25a7a5; font-weight:800; font-size:20px; background:#ffffff; padding:6px 12px; border-radius:999px; box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.faq-main .phone-mock .screen{
+  position:absolute; inset:18px; border-radius:20px; background:#ffffff;
+  display:flex; align-items:center; justify-content:center;
+}
+.faq-main .screen-brand{
+  display:none;
+}
+/* ✅ 로고 이미지 자리 (기존 텍스트 크기 느낌 유지) */
+.faq-main .screen-logo{
+  max-width: 110px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-right: 5px;
+}
 
 /* 텍스트 */
 .faq-main .copy .title{ color:#ffffff; font-size:28px; font-weight:900; line-height:1.2; margin:0 0 10px;}

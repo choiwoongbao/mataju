@@ -1055,5 +1055,17 @@
     display: none;
   }
 }
+/* ===================== 풍선 레이어 ===================== */
+.floating-balloons {
+  position: absolute;      /* ← fixed 아니고 */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1100px;          /* 풍선 보일 구간, 필요하면 900~1200px 사이로 조절 */
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;        /* 아래로 튀어나오는 줄 숨김 */
+}
+
 
 </style>

@@ -7,38 +7,37 @@
       <form class="login-form" @submit.prevent="handleLogin">
         <input type="text" placeholder="아이디" v-model="userId" />
         <input type="password" placeholder="비밀번호" v-model="password" />
+        <!-- ✅ 로그인 -->
         <button type="submit" class="login-btn">로그인</button>
-
+        <!-- ✅ 비회원 예약하기: 폼 submit 안 타게 type="button" + 이동만 -->
+        <button type="button" class="login-btn-2" @click="goGuestReserve">
+          비회원 예약하기
+        </button>
 
         <!-- 찾기 -->
         <div class="link-row">
           <a href="#" @click.prevent="showFindId = true">아이디 찾기</a>
           <span>|</span>
-           <a href="#" @click.prevent="showFindPw = true">비밀번호 찾기</a>
+          <a href="#" @click.prevent="showFindPw = true">비밀번호 찾기</a>
           <span>|</span>
           <a href="/signup">회원가입</a>
         </div>
       </form>
 
       <div class="social-login">
-       <button class="naver" aria-label="네이버 로그인">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="40"
-    height="30"
-    viewBox="0 0 600 500"
-  >
-    <!-- 단색 초록 원 -->
-    <!-- <circle cx="256" cy="256" r="256" fill="#03C75A" /> -->
-    <!-- 중앙 정렬 흰색 N -->
-    <path
-      fill="#ffffff"
-      d="M176 128h88l72 112V128h88v256h-88l-72-112v112h-88V128z"
-    />
-  </svg>
-</button>
-
-
+        <button class="naver" aria-label="네이버 로그인">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="30"
+            viewBox="0 0 600 500"
+          >
+            <path
+              fill="#ffffff"
+              d="M176 128h88l72 112V128h88v256h-88l-72-112v112h-88V128z"
+            />
+          </svg>
+        </button>
 
         <button class="kakao"><i class="fa-solid fa-comment"></i></button>
         <button class="google"><i class="fa-brands fa-google"></i></button>
@@ -50,45 +49,42 @@
       <div class="coupon-banner">
         <div class="banner-text">
           <div class="title-bg">
-
             <h2>마타주가 처음인 당신을 위해</h2>
           </div>
-<div class="scr-bg">
-  <p>
-    신규회원 가입 쿠폰을 발송드려요<br />
-    가벼운 여행을 시작해 보세요!
-  </p>
-</div>
-<!-- <div>blank</div> -->
+          <div class="scr-bg">
+            <p>
+              신규회원 가입 쿠폰을 발송드려요<br />
+              가벼운 여행을 시작해 보세요!
+            </p>
+          </div>
         </div>
         <div class="coupon-card">
           <img src="/public/images/sign/Login_cupon.png" alt="쿠폰" />
-          <!-- <div class="side">#COUPON</div> -->
         </div>
       </div>
     </div>
   </div>
-<!-- <FindResarv/> -->
-    <!-- ✅ 모달 삽입 -->
-    <FindIDModal v-if="showFindId" @close="showFindId = false" />
-    <FindPwModal v-if="showFindPw" @close="showFindPw = false" />
+
+  <!-- ✅ 모달 -->
+  <FindIDModal v-if="showFindId" @close="showFindId = false" />
+  <FindPwModal v-if="showFindPw" @close="showFindPw = false" />
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import FindIDModal from "@/views/sign/FindID.vue";
 import FindPwModal from "@/views/sign/FindPw.vue";
 import FindResarv from "./FindResarv.vue";
 
+const router = useRouter();
 
 const userId = ref("");
 const password = ref("");
 
 // Find id pw
-
 const showFindId = ref(false);
 const showFindPw = ref(false);
-
 
 const handleLogin = () => {
   if (!userId.value || !password.value) {
@@ -98,9 +94,10 @@ const handleLogin = () => {
   alert(`로그인 시도: ${userId.value}`);
 };
 
-
-
-
+// ✅ 비회원 예약하기 -> /reservation 으로 바로 이동
+const goGuestReserve = () => {
+  router.push("/reservation");
+};
 </script>
 
 <style scoped lang="scss">
@@ -112,13 +109,12 @@ const handleLogin = () => {
     width: 100%;
   }
 }
-.title-bg{
-// background-color: #2db400;
+.title-bg {
+  // background-color: #2db400;
 }
-.scr-bg{
+.scr-bg {
   // background-color: #ffe812;
   display: inline-block;
-
 }
 /* 메인 레이아웃: flex 기반 */
 .login-page {
@@ -136,7 +132,7 @@ const handleLogin = () => {
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: center;
-     min-height: 100vh;
+    min-height: 100vh;
   }
 }
 
@@ -149,6 +145,7 @@ const handleLogin = () => {
   align-items: center;
   justify-content: center;
   // padding: 40px 20px;
+  margin-top: 10px;
 }
 
 .title {
@@ -193,6 +190,22 @@ const handleLogin = () => {
 
     &:hover {
       background: $color_main_deep;
+    }
+  }
+
+  .login-btn-2 {
+    width: 100%;
+    background: rgb(201, 201, 201);
+    color: #616161;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 14px 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgb(180, 180, 180);
     }
   }
 
@@ -268,9 +281,12 @@ const handleLogin = () => {
 /* 배너 내용 */
 .coupon-banner {
   width: 100%;
-  background: 
-    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), /* 위에 흐린 흰색 필터 */
-    url(/public/images/sign/2462865.png) no-repeat center center / cover;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.4)
+    ),
+    /* 위에 흐린 흰색 필터 */ url(/public/images/sign/2462865.png) no-repeat center
+      center / cover;
   padding: 40px;
   border-radius: 6px;
   border: 1px solid #e7e7e7;
@@ -325,17 +341,21 @@ const handleLogin = () => {
   }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .coupon-banner {
-  width: 100%;
-  background: 
-    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), /* 위에 흐린 흰색 필터 */
-    url(/public/images/sign/2462865.png) no-repeat center center / cover;
-  padding: 40px;
-  border-radius: 6px;
-  border: 1px solid #e7e7e7;
-  text-align: center;
-  max-width: 320px;
-  background-color: #fff;}
+    width: 100%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.4)
+      ),
+      /* 위에 흐린 흰색 필터 */ url(/public/images/sign/2462865.png) no-repeat
+        center center / cover;
+    padding: 40px;
+    border-radius: 6px;
+    border: 1px solid #e7e7e7;
+    text-align: center;
+    max-width: 320px;
+    background-color: #fff;
+  }
 }
 </style>

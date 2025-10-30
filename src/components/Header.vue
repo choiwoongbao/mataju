@@ -2,7 +2,12 @@
 <template>
   <nav class="jb-nav" :class="{ 'is-open': isOpen }">
     <!-- Left: Logo -->
-    <router-link to="/" class="logo" aria-label="홈으로 이동">
+    <router-link
+      to="/"
+      class="logo"
+      aria-label="홈으로 이동"
+      @click.native="scrollToTop"
+    >
       <!-- ★ 변경: 텍스트 대신 이미지 -->
       <img class="logo-img" src="/images/mains/header/logo-1.png" alt="마타주 로고" />
     </router-link>
@@ -10,7 +15,7 @@
     <!-- Desktop Menu -->
     <div class="menu">
       <router-link class="dropdown" to="/information">이용안내</router-link>
-      <router-link class="dropdown" to="/reservation">예약하기
+      <router-link class="dropdown" to="/login">예약하기
            <ul class="submenu">
           <li><router-link to="/reservation">예약하기</router-link></li>
           <li><router-link to="/changereserv">예약변경</router-link></li>
@@ -92,10 +97,24 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch, reactive } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 const isOpen = ref(false)
 const toggle = () => (isOpen.value = !isOpen.value)
 const close = () => (isOpen.value = false)
+
+/* ✅ 로고 클릭 시 메인화면이면 맨 위로 스크롤 */
+const scrollToTop = async (e) => {
+  if (route.path === '/') {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else {
+    await router.push('/')
+  }
+}
 
 /* 기존 상태/핸들러 유지(다른 곳에서 쓸 수 있으므로 남김) */
 const section = reactive({ guide: false, reserve: false, support: false })
@@ -162,7 +181,7 @@ watch(isOpen, (open) => {
 .menu > a,
 .menu > .dropdown {
   color: #333;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   padding: 5px 10px;
   position: relative;
@@ -192,18 +211,14 @@ watch(isOpen, (open) => {
   transform: translateX(-50%);
   margin-top: -2px; 
   padding: 6px; 
-  // border: 1px solid #ddd; 
   border-radius: 4px;
   min-width: 160px; 
   width: auto; 
   background: #fff; 
   z-index: 10001;
   text-align: center;
-  // box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  // 추가 
-   background: rgba($color_main, 0.005); /* 메인색 10% 투명 */
+   background: rgba($color_main, 0.005);
   backdrop-filter: blur(30px);
-
 }
 .dropdown:hover .submenu { display: block; }
 .submenu li { padding: 0; }
@@ -281,14 +296,12 @@ watch(isOpen, (open) => {
 .sublist a { font-size: 17px; color: #333; text-decoration: none; line-height: 1.7; }
 .sublist a:hover { color: $color_main_deep; }
 
-/* 트랜지션 */
 .acc-enter-from, .acc-leave-to { max-height: 0; opacity: 0; }
 .acc-enter-to,   .acc-leave-from { max-height: 300px; opacity: 1; }
 .acc-enter-active, .acc-leave-active { transition: max-height .22s ease, opacity .22s ease; }
 .slide-enter-from, .slide-leave-to { opacity: 0; }
 .slide-enter-active, .slide-leave-active { transition: opacity .2s ease; }
 
-/* ====== Responsive ====== */
 @media (max-width: 1000px) {
   .menu { gap: 10px; }
   .login { padding-left: 0; }
@@ -304,14 +317,12 @@ watch(isOpen, (open) => {
   .login-mini a { font-size: 13px; }
 }
 
-/* a11y: 시각적 숨김 */
 .sr-only {
   position: absolute !important;
   width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* ≥768px: 네 코드 유지 */
 @media (min-width: 769px) {
   .nav-right { display: flex; align-items: center; gap: 14px; }
   .hamburger { display: none; }
@@ -320,7 +331,6 @@ watch(isOpen, (open) => {
   .login-mini a { font-size: 14px; }
 }
 
-/* ✅ 텍스트만 가로 정렬 */
 .quick-row{
   display:flex; align-items:center; gap:12px;
   margin-top:8px; margin-bottom:18px;
@@ -333,7 +343,7 @@ watch(isOpen, (open) => {
 .sep{ color:#d1d5db; }
 
 .jb-nav{
-  position: sticky;  /* ← fixed 대신 sticky */
+  position: sticky;
   top: 0;
   left: 0; right: 0;
   z-index: 9999;
@@ -344,17 +354,15 @@ watch(isOpen, (open) => {
   top: 0; right: 0; bottom: 0;
   overflow-y: auto;
 }
-/* 로고 이미지를 기존 텍스트 로고 크기와 동일하게 맞춤 */
 .logo {
   display: inline-flex;
   align-items: center;
   line-height: 1;
 }
 .logo-img {
-  height: 2.2em;    /* 텍스트 기준 1em = 기존 폰트 크기와 동일한 높이 */
-  width: auto;    /* 비율 유지 */
+  height: 2.2em;
+  width: auto;
   display: block;
   object-fit: contain;
 }
-
 </style>

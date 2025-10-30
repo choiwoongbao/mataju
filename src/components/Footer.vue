@@ -14,14 +14,7 @@
           <p>Copyright © JIMGBAG Corp. All Rights Reserved.</p>
         </address>
 
-        <div class="social">
-          <a href="#" aria-label="Instagram" class="icon">
-            <!-- SVG 인스타그램 여기 -->
-          </a>
-          <a href="#" aria-label="Blog" class="icon">
-            <!-- SVG 블로그/유튜브 여기 -->
-          </a>
-        </div>
+        
 
         <nav class="legal">
           <a href="#">이용약관</a>

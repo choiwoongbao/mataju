@@ -357,7 +357,7 @@ onMounted(() => {
 .icon img { width: 100%; height: 100%; object-fit: contain; }
 
 /* 텍스트 */
-.card-tit { font-size: clamp(18px, 1.5vw, 20px); font-weight: 700; margin-bottom: 8px; }
+.card-tit { font-size: clamp(18px, 1.5vw, 20px); font-weight: 700; margin-bottom: 8px; color: #000;}
 .card-sub { font-size: 16.5px; color: #a0afaa; }
 
 /* FAQ */
@@ -456,6 +456,7 @@ onMounted(() => {
   padding: 8px 20px;
   border-radius: 4px;
   cursor: pointer;
+  color: #000;
 }
 .ghost:hover { background: #f8fbfa; }
 .page-indicator { font-size: 14px; color: #6b7a76; }

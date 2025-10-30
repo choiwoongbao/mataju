@@ -183,7 +183,7 @@ function toggleFees(){ showFees.value = !showFees.value }
   padding:10px 16px; cursor:pointer; transition:border-color .2s, background .2s;
   text-align:center; white-space:nowrap;
 }
-.pill .tt{ font-weight:800; font-size:clamp(13px,1.4vw,14px); line-height:1.3; }
+.pill .tt{ color:#000; font-weight: 800; font-size:clamp(13px,1.4vw,14px); line-height:1.3; }
 .pill .dim{ color:#6b7280; font-size:12px; line-height:1.2; }
 .pill.active{ border-color:#3A8C88; background:#f0fdfd; }
 @media (max-width:640px){ .size-strip{ grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); } }

@@ -172,7 +172,7 @@ breakpoints: {
 
 .title h1 {
   font-weight: 700;
-  font-size: clamp(26px, 2.8vw, 38px);
+  font-size: clamp(25px, 2.8vw, 38px);
 }
 
 .title h2 {

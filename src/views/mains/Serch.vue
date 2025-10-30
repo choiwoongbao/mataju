@@ -542,6 +542,7 @@ onMounted(() => {
 }
 
 .location-select {
+  color: #000;
   background: white;
   cursor: pointer;
 }

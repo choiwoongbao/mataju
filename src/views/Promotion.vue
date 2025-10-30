@@ -750,7 +750,7 @@
   transition: background 0.2s ease, transform 0.15s ease;
 }
 .app-txt button:hover {
-  background-color: #027374;
+  background-color: #3A8C88;
   transform: translateY(1px);
 }
 
@@ -917,6 +917,11 @@
 }
 
 @media (max-width: 390px) {
+    .promo-banner img {
+    width: min(92vw, 360px);
+    height: auto;
+    object-fit: contain;
+  }
   .app-img {
     width: 280px;
     text-align: left;
@@ -934,6 +939,17 @@
     font-size: 13px;
     padding: 10px 15px;
   }
+  .cap-amount {
+    font-size: 17.5px;
+  }
+  .review-note{
+    font-size: 13.5px;
+  }
+  .pro-app{
+    padding: 25px 195px;
+  }
+  .app-txt button{font-weight: 600;}  // 머지해보고 필요없음 지우기
+
 }
 
 /* ===================== 풍선 레이어 ===================== */

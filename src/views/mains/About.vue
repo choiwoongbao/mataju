@@ -20,9 +20,9 @@
         </div>
 
         <!-- ✅ '자세히 보러 가기' — 요금 섹션과 완전히 동일 규칙 -->
-        <div class="more-row">
-          <router-link class="more" :to="moreLink">자세히 보러 가기 →</router-link>
-        </div>
+          <!-- <div class="more-row">
+            <router-link class="more" :to="moreLink">자세히 보러 가기 →</router-link>
+          </div> -->
       </div>
     </div>
   </section>

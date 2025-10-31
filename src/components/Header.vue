@@ -8,15 +8,15 @@
       aria-label="홈으로 이동"
       @click.native="scrollToTop"
     >
-      <!-- ★ 변경: 텍스트 대신 이미지 -->
       <img class="logo-img" src="/images/mains/header/logo-1.png" alt="마타주 로고" />
     </router-link>
 
     <!-- Desktop Menu -->
     <div class="menu">
       <router-link class="dropdown" to="/information">이용안내</router-link>
-      <router-link class="dropdown" to="/login">예약하기
-           <ul class="submenu">
+      <router-link class="dropdown" to="/login">
+        예약하기
+        <ul class="submenu">
           <li><router-link to="/reservation">예약하기</router-link></li>
           <li><router-link to="/changereserv">예약변경</router-link></li>
         </ul>
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <!-- Mobile Right: 로그인/예약확인 + 햄버거 -->
+    <!-- Mobile Right -->
     <div class="nav-right">
       <div class="login-mini">
         <router-link to="/login">로그인</router-link>
@@ -51,44 +51,25 @@
     </div>
   </nav>
 
-  <!-- ✅ 헤더 고정 시 본문 가려짐 방지용 스페이서 -->
   <div class="nav-spacer" aria-hidden="true"></div>
 
-  <!-- Mobile Panel -->
   <transition name="slide">
-    <aside
-      v-show="isOpen"
-      id="mobile-panel"
-      class="mobile-panel"
-      @click.self="close()"
-    >
+    <aside v-show="isOpen" id="mobile-panel" class="mobile-panel" @click.self="close()">
       <div class="panel-inner">
         <button class="panel-close" @click="close()" aria-label="메뉴 닫기">×</button>
 
-        <!-- (모바일 전용) 텍스트 퀵 메뉴 -->
         <div class="quick-row">
           <router-link to="/login" class="quick-link" @click="close()">로그인</router-link>
           <span class="sep" aria-hidden="true">|</span>
           <router-link to="/signup" class="quick-link" @click="close()">예약 확인</router-link>
         </div>
 
-        <!-- ✅ 상위메뉴만 있는 단일 리스트 (하위메뉴/아코디언 제거) -->
         <ul class="mobile-list">
-          <li>
-            <router-link to="/information" class="m-title link-title" @click="close()">이용안내</router-link>
-          </li>
-          <li>
-            <router-link to="/reservation" class="m-title link-title" @click="close()">예약하기</router-link>
-          </li>
-          <li>
-            <router-link to="/promotion" class="m-title link-title" @click="close()">프로모션</router-link>
-          </li>
-          <li>
-            <router-link to="/community" class="m-title link-title" @click="close()">커뮤니티</router-link>
-          </li>
-          <li>
-            <router-link to="/support" class="m-title link-title" @click="close()">고객센터</router-link>
-          </li>
+          <li><router-link to="/information" class="m-title link-title" @click="close()">이용안내</router-link></li>
+          <li><router-link to="/reservation" class="m-title link-title" @click="close()">예약하기</router-link></li>
+          <li><router-link to="/promotion" class="m-title link-title" @click="close()">프로모션</router-link></li>
+          <li><router-link to="/community" class="m-title link-title" @click="close()">커뮤니티</router-link></li>
+          <li><router-link to="/support" class="m-title link-title" @click="close()">고객센터</router-link></li>
         </ul>
       </div>
     </aside>
@@ -106,7 +87,6 @@ const isOpen = ref(false)
 const toggle = () => (isOpen.value = !isOpen.value)
 const close = () => (isOpen.value = false)
 
-/* ✅ 로고 클릭 시 메인화면이면 맨 위로 스크롤 */
 const scrollToTop = async (e) => {
   if (route.path === '/') {
     e.preventDefault()
@@ -116,11 +96,9 @@ const scrollToTop = async (e) => {
   }
 }
 
-/* 기존 상태/핸들러 유지(다른 곳에서 쓸 수 있으므로 남김) */
 const section = reactive({ guide: false, reserve: false, support: false })
 const toggleSection = (key) => (section[key] = !section[key])
 
-/* ESC 닫기 + 스크롤 잠금 */
 const onEsc = (e) => { if (e.key === 'Escape') close() }
 onMounted(() => window.addEventListener('keydown', onEsc))
 onBeforeUnmount(() => {
@@ -136,11 +114,9 @@ watch(isOpen, (open) => {
 
 <style scoped lang="scss">
 @use "/src/assets/style/variables" as *;
-/* ====== 헤더 높이 변수 (필요시만 조정) ====== */
 :root { --nav-h: 76px; }
 @media (max-width: 768px){ :root { --nav-h: 64px; } }
 
-/* ====== Base (★ fixed 적용) ====== */
 .jb-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -155,18 +131,23 @@ watch(isOpen, (open) => {
   background: #fff;
   min-height: var(--nav-h);
 }
-
-/* ★ 본문 가려짐 방지 */
 .nav-spacer{ height: var(--nav-h); }
 
-/* ====== 기존 스타일 그대로 ====== */
 .logo {
   width: auto;
   font-size: clamp(30px, 3vw, 38px);
   font-weight: 600;
   color: $color_main;
-  white-space: nowrap;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.logo-img {
+  height: 1.7em;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .menu {
@@ -177,7 +158,6 @@ watch(isOpen, (open) => {
   font-size: clamp(15px, 1vw, 20px);
 }
 
-/* 타이틀 메뉴: 600 */
 .menu > a,
 .menu > .dropdown {
   color: #333;
@@ -190,72 +170,66 @@ watch(isOpen, (open) => {
 .menu > a:hover,
 .menu > .dropdown:hover { color: $color_main_deep; }
 
-.login { padding-left: 2vw; }
+/* ✅ 클릭(현재 라우트)일 때도 동일한 색 */
+.menu > a.router-link-active,
+.menu > a.router-link-exact-active,
+.menu > .dropdown.router-link-active,
+.menu > .dropdown.router-link-exact-active {
+  color: $color_main_deep;
+}
+
+/* ✅ 로그인/예약확인 버튼도 동일하게 호버 + active 색상 */
 .login a {
   color: #a0a0a0;
   font-size: clamp(12px, 1vw, 16px);
   text-decoration: none;
+  transition: color 0.2s;
 }
-.login > a:hover { color: $color_main; font-weight: 500; }
-
-/* ====== Desktop dropdown ====== */
-.dropdown { 
-  position: relative; 
-  display: inline-flex; 
-  align-items: center; }
-
-  /* ====== 서브메뉴 (Dropdown + Submenu) ====== */
-.dropdown { 
-  position: relative; 
-  display: inline-flex; 
-  align-items: center;
+.login a:hover,
+.login a.router-link-active,
+.login a.router-link-exact-active {
+  color: $color_main_deep;
+  font-weight: 600;
 }
 
+.login { padding-left: 2vw; }
+
+/* ===== Dropdown ===== */
+.dropdown { position: relative; display: inline-flex; align-items: center; }
 .dropdown .submenu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 50%;
+  top: 100%; left: 50%;
   transform: translateX(-50%);
   margin-top: -2px;
   padding: 8px 0;
   border-radius: 10px;
   min-width: 160px;
-  background: rgba(255, 255, 255, 0.9); 
-  z-index: 10001;
+  background: rgba(255,255,255,0.9);
   text-align: center;
   transition: all 0.2s ease;
+  z-index: 10001;
 }
-
-.dropdown:hover .submenu {
-  display: block;
-}
-
-.submenu li {
-  padding: 0;
-}
+.dropdown:hover .submenu { display: block; }
 
 .submenu li a {
   display: block;
   padding: 12px 24px;
-  line-height: 1.4;
   color: #333;
   text-decoration: none;
   font-size: 16px;
-  font-weight: 400;
-  white-space: nowrap;
-  word-break: keep-all;
 }
+.submenu li a:hover { color: $color_main_deep; }
 
-.submenu li a:hover {
-  color: $color_main_deep;
-}
-
-/* ====== Mobile Top Right ====== */
 .nav-right { display: none; align-items: center; gap: 14px; }
 .login-mini { display: flex; align-items: center; gap: 12px; }
-.login-mini a { color: #6f6f6f; font-size: 16px !important; text-decoration: none; }
-.login-mini a:hover { color: $color_main; }
+.login-mini a { color: #6f6f6f; font-size: 16px !important; text-decoration: none; transition: color 0.2s; }
+.login-mini a:hover,
+.login-mini a.router-link-active,
+.login-mini a.router-link-exact-active {
+  color: $color_main_deep;
+  font-weight: 600;
+}
 
 /* Hamburger */
 .hamburger {
@@ -264,7 +238,7 @@ watch(isOpen, (open) => {
   border: 0; background: transparent; cursor: pointer; padding: 2px;
 }
 .hamburger .bar {
-  display: block; width: 100%; height: 3px;
+  width: 100%; height: 3px;
   background: #444; border-radius: 2px;
   transition: transform .25s ease, opacity .25s ease;
 }
@@ -272,7 +246,6 @@ watch(isOpen, (open) => {
 .jb-nav.is-open .hamburger .bar:nth-child(2){ opacity: 0; }
 .jb-nav.is-open .hamburger .bar:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
 
-/* ====== Mobile Panel (★ 헤더 아래에서 시작) ====== */
 .mobile-panel {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.35);
@@ -287,36 +260,17 @@ watch(isOpen, (open) => {
   box-shadow: -6px 0 16px rgba(0,0,0,.08);
   padding: 28px 22px;
   overflow-y: auto;
-  z-index: 12001;
 }
 .panel-close {
   position: absolute; top: 8px; right: 10px;
-  font-size: 28px; line-height: 1;
+  font-size: 28px;
   background: transparent; border: none; cursor: pointer; color: #333;
 }
 
-/* Mobile (큰 제목/아코디언) */
 .mobile-list { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
-.m-title-btn {
-  width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 20px; font-weight: 700; color: $color_main;
-  background: transparent; border: 0; padding: 6px 0; cursor: pointer; text-align: left;
-}
-.chev { transition: transform .2s ease; display: inline-block; }
-.chev.open { transform: rotate(180deg); }
 .m-title.link-title {
-  font-size: 20px; font-weight: 700; color: $color_main; text-decoration: none; padding: 6px 0; display: inline-block;
+  font-size: 20px; font-weight: 700; color: $color_main; text-decoration: none;
 }
-.sublist { overflow: hidden; display: grid; gap: 8px; margin-left: 8px; padding: 4px 0 8px; }
-.sublist a { font-size: 17px; color: #333; text-decoration: none; line-height: 1.7; }
-.sublist a:hover { color: $color_main_deep; }
-
-.acc-enter-from, .acc-leave-to { max-height: 0; opacity: 0; }
-.acc-enter-to,   .acc-leave-from { max-height: 300px; opacity: 1; }
-.acc-enter-active, .acc-leave-active { transition: max-height .22s ease, opacity .22s ease; }
-.slide-enter-from, .slide-leave-to { opacity: 0; }
-.slide-enter-active, .slide-leave-active { transition: opacity .2s ease; }
 
 @media (max-width: 1000px) {
   .menu { gap: 10px; }
@@ -325,7 +279,6 @@ watch(isOpen, (open) => {
 @media (max-width: 768px) {
   .menu { display: none; }
   .nav-right { display: flex; }
-  .logo { font-size: 28px; }
   .login-mini { display: none; }
 }
 @media (max-width: 390px) {
@@ -344,7 +297,6 @@ watch(isOpen, (open) => {
   .hamburger { display: none; }
   .login { display: none; }
   .menu { margin-left: auto; margin-right: 2vw; justify-content: flex-end; }
-  .login-mini a { font-size: 14px; }
 }
 
 .quick-row{
@@ -353,9 +305,14 @@ watch(isOpen, (open) => {
 }
 .quick-link{
   font-size:16px; font-weight:700; color:#1f1f1f;
-  text-decoration:none; padding:4px 2px;
+  text-decoration:none; padding:4px 2px; transition:color .2s;
 }
-.quick-link:hover{ text-decoration:underline; }
+.quick-link:hover,
+.quick-link.router-link-active,
+.quick-link.router-link-exact-active {
+  color: $color_main_deep;
+  text-decoration:underline;
+}
 .sep{ color:#d1d5db; }
 
 .jb-nav{
@@ -365,20 +322,5 @@ watch(isOpen, (open) => {
   z-index: 9999;
 }
 .mobile-panel{ position: fixed; inset: 0; height: 100dvh; }
-.panel-inner{
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  overflow-y: auto;
-}
-.logo {
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-}
-.logo-img {
-  height: 1.7em;
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
+.panel-inner{ position: absolute; top: 0; right: 0; bottom: 0; overflow-y: auto; }
 </style>

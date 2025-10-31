@@ -11,7 +11,8 @@
           <address class="corp-info">
             <p>대표자: TEAM A | 주소: 서울 중랑구 3로 3길 재밌빌딩 5F</p>
             <p>사업자등록번호: 123-45-12345 | 통신판매업신고번호: 2호</p>
-            <p>Copyright © JIMGBAG Corp. All Rights Reserved.</p>
+            <!-- <p>Copyright © JIMGBAG Corp. All Rights Reserved.</p> -->
+            <p>TEL : 02-691-9999</p>
           </address>
 
           <nav class="legal">
@@ -31,24 +32,11 @@
             12시 - 13시 (점심시간)
           </p>
 
-          <ul class="cs-contact">
+          <ul class="footer-team">
             <li>
-              <span class="cs-icon">
-                <!-- SVG 전화 아이콘 여기 -->
+              <span class="f-teamname">
               </span>
-              <a href="tel:02-691-9999">02-691-9999</a>
-            </li>
-            <li>
-              <span class="cs-icon">
-                <!-- SVG 인스타 아이콘 여기 -->
-              </span>
-              <a href="#" rel="nofollow">@mataju</a>
-            </li>
-            <li>
-              <span class="cs-icon">
-                <!-- SVG 메일 아이콘 여기 -->
-              </span>
-              <a href="mailto:team@abc.kr">mataju@abc.kr</a>
+              <p>정현영 · 김혜주 · 최시우</p>
             </li>
           </ul>
         </div>

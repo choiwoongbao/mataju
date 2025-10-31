@@ -154,7 +154,7 @@
 }
 .ban-text strong {
   font-weight: 800;
-  color: #000;
+  color: #DE3464;
 }
 .ban-text small {
   color: #b8b3b3;

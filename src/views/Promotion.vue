@@ -362,28 +362,55 @@
 /* 위아래 둥둥 + 살짝 회전 */
 @keyframes floatY {
   0% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    transform: translateY(0) rotate(0deg) scale(7);
   }
   25% {
-    transform: translateY(-12px) rotate(1.6deg) scale(1.01);
+    transform: translateY(-12px) rotate(1.6deg) scale(7);
   }
   50% {
-    transform: translateY(6px) rotate(-1.4deg) scale(0.995);
+    transform: translateY(6px) rotate(-1.4deg) scale(7);
   }
   75% {
-    transform: translateY(-10px) rotate(1deg) scale(1.005);
+    transform: translateY(-10px) rotate(1deg) scale(7);
   }
   100% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    transform: translateY(0) rotate(0deg) scale(7);
   }
 }
 
-/* 1220 밑에서는 풍선 치우기 (너 무너지는 거 싫어하니까) */
+// b1 여기저기 날라다니는 풍선 제거 후 welcome 풍선 기능 추가
 @media (max-width: 1220px) {
   .floating-balloons {
     display: none;
   }
+  
+  .promo-banner img {
+    animation: banner-bounce 2s ease-in-out infinite;
+    transform-origin: 50% 100%;
+    backface-visibility: hidden;
+  }
+
+
+/* 배너 통통 효과 */
+@keyframes banner-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  20% {
+    transform: translateY(-10px) scale(0.995, 1.01);
+  }
+  40% {
+    transform: translateY(0) scale(1.01, 0.995);
+  }
+  65% {
+    transform: translateY(-6px) scale(0.998, 1.005);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
+}
+  
 
 /* ===================== 기존 콘텐츠 ===================== */
 .promo-inner {
@@ -405,14 +432,12 @@
 
 /* 네가 쓰던 통통 효과 */
 .promo-banner img {
-  animation: balloon-bounce 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  // animation: balloon-bounce 6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
   transform-origin: 50% 100%;
   will-change: transform;
   backface-visibility: hidden;
 }
-.promo-banner:hover img {
-  animation-duration: 1.6s;
-}
+
 @keyframes balloon-bounce {
   0% {
     transform: translateY(0) scale(1, 1);
@@ -914,6 +939,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
+  .app-txt{text-align: center;}
 }
 
 @media (max-width: 390px) {
@@ -929,6 +955,9 @@
   .app-img img {
     width: 280px;
   }
+  .app-txt{
+    text-align: center;
+  }
   .app-txt h2 {
     font-size: 28px;
   }
@@ -940,7 +969,7 @@
     padding: 10px 15px;
   }
   .cap-amount {
-    font-size: 17.5px;
+    font-size: 17px;
   }
   .review-note{
     font-size: 13.5px;

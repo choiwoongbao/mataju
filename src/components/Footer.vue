@@ -249,6 +249,9 @@
   .footer .cs-contact li {
     justify-content: center;
   }
+  .footer-team{
+    text-align: center;
+  }
 }
 
 /* 3) 아주 작은 폭: 320px 이하 기기 대응 (280px대까지 안전) */

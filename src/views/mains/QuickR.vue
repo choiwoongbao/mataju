@@ -293,7 +293,6 @@ const Calendar = defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .search-dock > .search-bar {
   pointer-events: auto;
 }
@@ -323,6 +322,11 @@ const Calendar = defineComponent({
   cursor: pointer;
   z-index: 11;
 }
+.search-item input {
+  color: #3e9c9b;
+  font-weight: 600;
+  font-size: 15px;
+}
 .search-item:not(:first-child)::before {
   content: "";
   position: absolute;
@@ -335,7 +339,7 @@ const Calendar = defineComponent({
 .search-item.active {
   background: transparent;
   z-index: 20;
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 .label {
@@ -350,7 +354,7 @@ const Calendar = defineComponent({
 input {
   border: none;
   outline: none;
-    font-size: clamp(14.5px, 1.5vw, 15.5px);
+  font-size: clamp(14.5px, 1.5vw, 15.5px);
   color: #b8b3b3;
   padding: 0;
   width: 100%;
@@ -377,7 +381,7 @@ input::placeholder {
   transition: background 0.2s ease, transform 0.05s ease;
 }
 .search-btn:hover {
-  background: #3A8C88;
+  background: #3a8c88;
 }
 .search-btn:active {
   transform: translateY(1px);
@@ -700,7 +704,7 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
- 
+
   .popover {
     left: 16px;
     right: 16px;
@@ -779,7 +783,6 @@ input::placeholder {
   .search-item {
     padding: 12px 16px;
   }
-
 }
 @media (max-width: 1150px) {
   .search-bar {
@@ -791,28 +794,28 @@ input::placeholder {
     padding: 12px 14px;
   }
   .search-item input {
-    min-width: 0;       
+    min-width: 0;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
   }
 
-// search 바 사이 before 
+  // search 바 사이 before
   .search-item:not(:first-child)::before {
     height: 50px;
     top: 10px;
     bottom: 8px;
   }
   .search-item.size-item .popover,
-  .search-item.storage-item .popover { 
-    right: -70px;           
-    width: 380px;  
+  .search-item.storage-item .popover {
+    right: -70px;
+    width: 380px;
   }
   .search-item .popover {
     left: 0;
-    right: 0;      
+    right: 0;
     width: auto;
-    max-width: none;  
+    max-width: none;
     border-radius: 18px;
   }
   .search-item .popover-guests {
@@ -827,7 +830,7 @@ input::placeholder {
     margin-left: 10px;
   }
   .guest-txt small {
-    white-space: nowrap; 
+    white-space: nowrap;
   }
 }
 
@@ -850,12 +853,16 @@ input::placeholder {
     max-width: none;
   }
   .search-item.size-item .popover,
-  .search-item.storage-item .popover { 
-    right: -70px;           
-    width: 330px;            
+  .search-item.storage-item .popover {
+    right: -70px;
+    width: 330px;
   }
-  .dest-row{ padding: 5px 10px;}
-.dest-row small{font-size:10px;}
+  .dest-row {
+    padding: 5px 10px;
+  }
+  .dest-row small {
+    font-size: 10px;
+  }
   .guest-row {
     gap: 8px;
   }
@@ -878,14 +885,14 @@ input::placeholder {
     max-width: none;
   }
   .search-item.size-item .popover,
-  .search-item.storage-item .popover { 
-    right: -70px;           
-    width: 300px;            
+  .search-item.storage-item .popover {
+    right: -70px;
+    width: 300px;
   }
 
-.guest-ctrl{
-  gap: 5px;
-}
+  .guest-ctrl {
+    gap: 5px;
+  }
 }
 
 @media (max-width: 850px) {
@@ -903,56 +910,77 @@ input::placeholder {
   .search-item {
     padding: 10px 14px;
   }
-    .search-item:first-child .popover {
-    width: 95%; 
+  .search-item:first-child .popover {
+    width: 95%;
     margin: 0 auto;
     left: 10px;
   }
-  .popover-header{
-font-size: 18px;
+  .popover-header {
+    font-size: 18px;
   }
-    .dest-texts {
+  .dest-texts {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .dest-texts strong{font-size: 15px; }
-    .dest-texts small {
+  .dest-texts strong {
+    font-size: 15px;
+  }
+  .dest-texts small {
     display: inline-block;
     color: #a3a3a3;
     font-size: 12px;
     white-space: nowrap;
   }
-
 }
 
-@media (max-width:768px) {
-      .search-item:first-child .popover {
-    width: 95%; 
+@media (max-width: 768px) {
+  .search-item:first-child .popover {
+    width: 95%;
     margin: 0 auto;
     left: 20px;
   }
 }
 
-@media (max-width:390px) {
-  .search-bar{grid-template-columns: 1fr auto; width: 90%;  margin: 0 auto;}
-      .search-item{padding: 4px 20px;}
-      .label{font-size: 15px; }
-       .search-bar input {font-size:13px; margin-bottom:3px;}
-       .popover-header{font-size: 16px; padding: 8px 10px 14px;}
-       .dest-list{gap: 0;}
-.dest-texts strong{white-space: nowrap; color: #000;}
-.dest-texts small{display: none;}
+@media (max-width: 390px) {
+  .search-bar {
+    grid-template-columns: 1fr auto;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .search-item {
+    padding: 4px 20px;
+  }
+  .label {
+    font-size: 15px;
+  }
+  .search-bar input {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+  .popover-header {
+    font-size: 16px;
+    padding: 8px 10px 14px;
+  }
+  .dest-list {
+    gap: 0;
+  }
+  .dest-texts strong {
+    white-space: nowrap;
+    color: #000;
+  }
+  .dest-texts small {
+    display: none;
+  }
 
-    
-    .search-item:first-child .popover {
-      width: 120%;
-        margin: 0 auto ;
-        left: 5px;
-    }
-    .popover-dest{
-      padding: 8px;
-    }
+  .search-item:first-child .popover {
+    width: 120%;
+    margin: 0 auto;
+    left: 5px;
+  }
+  .popover-dest {
+    padding: 8px;
+  }
 }
 
 // @media (max-width: 767px) {

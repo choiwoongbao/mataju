@@ -477,7 +477,7 @@ onBeforeUnmount(() => {
 /* Card foot */
 .card-foot { display: flex; align-items: center; justify-content: space-between; }
 .actions { display: inline-flex; gap: 8px; }
-.vote { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; font-size: 13px; border: 1px solid #E5E7EB; border-radius: 8px; background: #fff; cursor: pointer; transition: transform .08s ease, border-color .15s ease, background .15s ease; }
+.vote { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; font-size: 13px; border: 1px solid #E5E7EB; border-radius: 8px; background: #fff; cursor: pointer; transition: transform .08s ease, border-color .15s ease, background .15s ease; color: #000;}
 .vote .icon { width: 16px; height: 16px; fill: currentColor; }
 .vote.up.active   { color: #0EA5E9; border-color: #BAE6FD; background: #F0F9FF; }
 .vote.down.active { color: #EF4444; border-color: #FECACA; background: #FEF2F2; }
@@ -490,8 +490,8 @@ onBeforeUnmount(() => {
 .meta2 .dot { opacity: .5; }
 
 /* Load more */
-.loadmore-wrap { display: grid; place-items: center; margin-top: 12px; }
-.loadmore { min-width: 160px; height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid #E5E7EB; background: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
+.loadmore-wrap { display: grid; place-items: center; margin-top: 12px;}
+.loadmore { min-width: 160px; height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid #E5E7EB; background: #fff; font-size: 14px; font-weight: 600; cursor: pointer; color: #000;}
 .loadmore:hover { background: #F9FAFB; }
 .loadmore:active { transform: translateY(1px); }
 
@@ -504,7 +504,8 @@ onBeforeUnmount(() => {
 .qna-foot { display: flex; gap: 10px; align-items: center; }
 
 /* 이모지 버튼 공통 */
-.like, .cmt {
+.like , .cmt {
+  color: #000;
   display: inline-flex;
   align-items: center;
   gap: 6px;

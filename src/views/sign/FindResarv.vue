@@ -8,7 +8,6 @@
     <!-- ✅ 중앙 카드 -->
     <main class="check-card">
       <h1>예약 확인</h1>
-
       <p class="desc">예약번호를 입력해주세요!</p>
 
       <form @submit.prevent="checkReservation">
@@ -24,7 +23,11 @@
       </form>
 
       <div class="link-row">
-        <a href="#" @click.prevent="openFindModal">예약번호 찾기</a>
+        <button type="button" class="link-btn" @click="openFindModal">
+          예약번호 찾기
+        </button>
+        <p>|</p>
+        <RouterLink to="/changereserv">예약 변경하기</RouterLink>
       </div>
     </main>
 
@@ -34,20 +37,28 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
+import { RouterLink } from "vue-router";
 import FindReservationModal from "@/views/sign/FindReservModal.vue";
+
+// ✅ 전역 $alert 접근
+const { appContext } = getCurrentInstance();
+const $alert = appContext.config.globalProperties.$alert;
 
 const reservationCode = ref("");
 const showModal = ref(false);
 
+// ✅ 예약번호 확인
 const checkReservation = () => {
   if (!reservationCode.value) {
-    alert("예약번호를 입력해주세요.");
+    $alert("예약번호를 입력해주세요.");
     return;
   }
-  alert(`예약번호 ${reservationCode.value} 확인 중...`);
+
+  $alert(`예약번호 ${reservationCode.value} 확인 중...`);
 };
 
+// ✅ 모달 열기
 const openFindModal = () => {
   showModal.value = true;
 };
@@ -80,7 +91,7 @@ const openFindModal = () => {
   background: #fff;
   width: 440px;
   padding: 50px 60px;
-  border-radius: 10px;
+  border-radius: $radius-m ;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   text-align: center;
 
@@ -103,7 +114,7 @@ const openFindModal = () => {
     input {
       width: 100%;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: $radius-s ;
       padding: 12px 14px;
       font-size: 15px;
       outline: none;
@@ -122,7 +133,7 @@ const openFindModal = () => {
     background: $color_main;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: $radius-s ;
     cursor: pointer;
 
     &:hover {
@@ -132,8 +143,32 @@ const openFindModal = () => {
 
   .link-row {
     margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
 
-    a {
+    p {
+      color: #999;
+      margin: 0;
+    }
+
+    /* ✅ 버튼형 링크 */
+    .link-btn {
+      background: none;
+      border: none;
+      color: #666;
+      text-decoration: underline;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        color: $color_main;
+      }
+    }
+
+    .router-link-active {
       font-size: 14px;
       color: #666;
       text-decoration: underline;

@@ -9,22 +9,34 @@
         <div class="form_card">
           <div class="card_header"><h2>정보</h2></div>
           <div class="card_content">
-            <table>
-              <tbody>
-                <tr v-if="form.name"><td>이름</td><td>{{ form.name }}</td></tr>
-                <tr v-if="form.phone"><td>휴대폰</td><td>{{ form.phone }}</td></tr>
-                <tr v-if="form.size"><td>사물함</td><td>{{ form.size }}</td></tr>
-                <tr v-if="form.address"><td>주소</td><td>{{ form.address }}</td></tr>
-                <tr v-if="form.dateRange && form.dateRange[0] && form.dateRange[1]">
-                  <td>기간</td><td>{{ form.dateRange[0] }} ~ {{ form.dateRange[1] }}</td>
-                </tr>
-                <tr v-if="form.pickupAddress"><td>픽업 주소</td><td>{{ form.pickupAddress }}</td></tr>
-                <tr v-if="form.homeAddress"><td>배송 주소</td><td>{{ form.homeAddress }}</td></tr>
-                <tr class="total" v-if="totalPrice > 0">
-                  <td>결제금액</td><td><strong>{{ formatKrw(totalPrice) }}</strong></td>
-                </tr>
-              </tbody>
-            </table>
+     <table>
+  <tbody>
+    <tr v-if="form.name"><td>이름</td><td>{{ form.name }}</td></tr>
+    <tr v-if="form.phone"><td>휴대폰</td><td>{{ form.phone }}</td></tr>
+    <tr v-if="form.size"><td>사물함</td><td>{{ form.size }}</td></tr>
+    <tr v-if="form.address"><td>주소</td><td>{{ form.address }}</td></tr>
+  <tr v-if="form.dateRange && form.dateRange[0] && form.dateRange[1]">
+  <td>기간</td><td>{{ formatDate(form.dateRange[0]) }} ~ {{ formatDate(form.dateRange[1]) }}</td>
+</tr>
+
+
+    <!-- ✅ 짐 가져오기 -->
+    <tr v-if="form.pickupAddress"><td>픽업 주소</td><td>{{ form.pickupAddress }}</td></tr>
+    <tr v-if="form.pickupAddressDetail"><td>픽업 상세주소</td><td>{{ form.pickupAddressDetail }}</td></tr>
+    <tr v-if="form.pickupDate"><td>픽업일</td><td>{{ formatDate(form.pickupDate) }}</td></tr>
+
+    <!-- ✅ 집으로 보내기 -->
+    <tr v-if="form.homeAddress"><td>배송 주소</td><td>{{ form.homeAddress }}</td></tr>
+    <tr v-if="form.homeAddressDetail"><td>배송 상세주소</td><td>{{ form.homeAddressDetail }}</td></tr>
+    <tr v-if="form.deliveryDate"><td>배송일</td><td>{{ formatDate(form.deliveryDate) }}</td></tr>
+
+    <!-- ✅ 결제금액 -->
+    <tr class="total" v-if="totalPrice > 0">
+      <td>결제금액</td><td><strong>{{ formatKrw(totalPrice) }}</strong></td>
+    </tr>
+  </tbody>
+</table>
+
           </div>
         </div>
 
@@ -76,26 +88,65 @@
     </div>
   </div>
 
- 
-</template>
+<FinishPayment
+  v-if="showFinish"
+  :total-price="finalTotal"
+  :payment-method="selectedPayment"
+  :order-id="orderId"
+  @close="closeFinish"
+/>
 
+
+</template>
 <script setup>
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { getCurrentInstance } from "vue";
 import Stepper from "@/components/reserv/Stepper.vue";
+import FinishPayment from "@/components/reserv/FinishPayment.vue";
 
-const route = useRoute();
+
+// Vue 인스턴스
+const { appContext } = getCurrentInstance();
+
+// 라우터 관련
 const router = useRouter();
+const route = useRoute();
 
-/* ✅ 전달받은 form 데이터 */
+
+
+// ✅ form 데이터 복원
 const form = ref(
   route.query.form
-    ? JSON.parse(route.query.form)
-    : { name: "", phone: "", size: "", address: "", dateRange: [] }
+    ? (() => {
+        const parsed = JSON.parse(route.query.form || "{}");
+
+        // ✅ 문자열 → Date 객체 복원
+        if (parsed.dateRange?.length === 2) {
+          parsed.dateRange = parsed.dateRange.map((d) => new Date(d));
+        }
+        if (parsed.pickupDate) parsed.pickupDate = new Date(parsed.pickupDate);
+        if (parsed.deliveryDate) parsed.deliveryDate = new Date(parsed.deliveryDate);
+
+        return parsed;
+      })()
+    : {}
 );
 
-/* ✅ 가격 정보 */
+// ✅ 날짜 포맷 함수
+const formatDate = (date) => {
+  if (!date) return "";
+  const d = new Date(date);
+  if (isNaN(d)) return "";
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+};
+
+// ✅ 기본 요금
 const baseTotal = ref(Number(route.query.totalPrice || 0));
+
 const selectedTabs = ref(["사물함 예약"]);
 const prices = {
   "사물함 예약": baseTotal.value,
@@ -103,7 +154,7 @@ const prices = {
   "집으로 배송하기": 20000,
 };
 
-/* ✅ 쿠폰·포인트 */
+// ✅ 쿠폰/포인트
 const useCoupon = ref(false);
 const usePoints = ref(false);
 
@@ -122,7 +173,7 @@ const finalTotal = computed(() =>
   Math.max(totalPrice.value - discountAmount.value, 0)
 );
 
-/* ✅ 결제 수단 */
+// ✅ 결제 수단
 const selectedPayment = ref("card");
 const paymentMethods = [
   { id: "card", label: "신용카드", img: "/images/reservation/image490.png" },
@@ -131,26 +182,49 @@ const paymentMethods = [
   { id: "bank", label: "무통장입금", img: "/images/reservation/image492.png" },
 ];
 
-/* ✅ 통화 포맷 */
+// ✅ 금액 포맷 함수
 const formatKrw = (v) =>
   new Intl.NumberFormat("ko-KR", { style: "currency", currency: "KRW" }).format(v);
 
-/* ✅ 결제 함수 */
-const saveAndPay = () => {
-  alert(`✅ 결제가 완료되었습니다!
-결제수단: ${selectedPayment.value}
-결제금액: ${formatKrw(finalTotal.value)}`);
+// ===================================================
+// ✅ 결제 완료 모달 제어
+// ===================================================
+// ✅ 모달 표시 여부
+const showFinish = ref(false);
+const orderId = ref(`MATAJU-${Date.now().toString().slice(-6)}`);
 
+// ✅ 결제 버튼 클릭 시 모달 표시
+const saveAndPay = () => {
+  showFinish.value = true;
+};
+
+// ✅ 모달 닫기 후 Reservation3으로 이동
+function closeFinish() {
+  showFinish.value = false;
+  
   const query = {
     form: JSON.stringify(form.value),
-    total: finalTotal.value,
+    totalPrice: finalTotal.value,
     payment: selectedPayment.value,
+    orderId: orderId.value,
   };
   router.push({ path: "/reservation3", query });
-};
+}
+
+
+
+
+
+
+function goHome() {
+  router.push("/");
+}
 </script>
+
 <style lang="scss" scoped>
 @use "/src/assets/style/variables" as *;
+@use "/src/assets/style/_reservation" as *;
+
 
 /* ✅ 기본 구조 */
 .reserve-page {
@@ -166,18 +240,36 @@ padding: 40px 0 80px 0;
   width: 100%;
   max-width: 1120px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr; /* ✅ 기본은 2:1 비율 가로 정렬 */
   gap: 2.5rem;
   align-items: start;
-padding: 20px;
-@media (max-width: 1020px){
-  width: 90%;
-}
+  padding: 20px;
+ 
+ 
+  
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr; /* ✅ 세로 정렬로 전환 */
+    gap: 2rem;
+  }
+
   @media (max-width: 500px) {
-    grid-template-columns: 1fr;
-   width: 100%;
+    width: 100%;
+    gap: 1.5rem;
   }
 }
+// 정렬 가온데로
+.right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    align-items: stretch; /* ✅ 세로 전체 폭으로 확장 */
+  }
+}
+
 // ======왼오나뉨=====
 .left-section{
  width: 100%;
@@ -188,13 +280,15 @@ gap: 2.5rem;
      grid-template-columns: 1fr;
   }
 }
-
+.payment_card{
+  width: 100%;
+}
 /* ✅ 공통 카드 스타일 */
 .form_card,
 .summary_card,
 .payment_card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: $radius-m ;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid #f0f0f0;
   padding: 30px 40px;
@@ -209,8 +303,8 @@ gap: 2.5rem;
     width: 100%;
     height: 12px;
     background: $color_main;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: $radius-m ;
+    border-top-right-radius: $radius-m ;
   }
 
   @media (max-width: 1024px) {
@@ -226,6 +320,9 @@ gap: 2.5rem;
   h2{
     font-size: $text-md;
   }
+}
+.summary_card{
+  height: fit-content;
 }
 /* ✅ 테이블 */
 .form_card table {
@@ -349,7 +446,7 @@ color: #444444;
     align-items: center;
     justify-content: center;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: $radius-s ;
     background: #fff;
     cursor: pointer;
     padding: 18px 0;
@@ -401,7 +498,7 @@ color: #444444;
   color: #fff;
   background: $color_main ;
   border: none;
-  border-radius: 6px;
+  border-radius: $radius-s ;
   cursor: pointer;
   margin: 20px auto 0;
   display: block;

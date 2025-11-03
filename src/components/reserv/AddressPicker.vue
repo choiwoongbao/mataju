@@ -86,14 +86,30 @@ async function mountPostcode() {
     "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
   );
   const Postcode = new window.daum.Postcode({
-    oncomplete: (data) => {
-      const addr = data.roadAddress || data.address;
-      localAddress.value = addr;
-      emit("update:modelValue", addr);
-      emit("selected", addr);
-      setTimeout(() => emit("close"), 800); // ✅ 주소 선택 후 자동 닫힘
-      if (hasKakaoKey) moveMapTo(addr);
-    },
+//     oncomplete: (data) => {
+//       // const addr = data.roadAddress || data.address;
+//       // ✅ 무조건 한글 도로명 또는 지번주소만 저장
+// const addr = data.roadAddress || data.jibunAddress || data.address;
+
+//       localAddress.value = addr;
+//       emit("update:modelValue", addr);
+//       emit("selected", addr);
+//       setTimeout(() => emit("close"), 800); // ✅ 주소 선택 후 자동 닫힘
+//       if (hasKakaoKey) moveMapTo(addr);
+//     },
+oncomplete: (data) => {
+  // ✅ 무조건 한글 주소만 저장하도록 수정
+  const addr = data.roadAddress || data.jibunAddress || data.address;
+
+  localAddress.value = addr;
+  emit("update:modelValue", addr);
+  emit("selected", addr);
+
+  setTimeout(() => emit("close"), 800); // ✅ 주소 선택 후 자동 닫힘
+
+  if (hasKakaoKey) moveMapTo(addr);
+},
+
     width: "100%",
     height: "420px",
   });
@@ -157,7 +173,7 @@ onMounted(async () => {
   width: min(720px, 80vw);
   background: #fff;
 
-  border-radius: 12px;
+  border-radius: $radius-m;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -201,7 +217,7 @@ onMounted(async () => {
   width: 100%;
 
   border: 1px solid #eee;
-  border-radius: 8px;
+  border-radius: $radius-s;
   overflow: hidden;
   position: relative;
   background-color: red;
@@ -251,7 +267,7 @@ onMounted(async () => {
   background: $color_main;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: $radius-s;
   font-size: 16px;
 }
 /* 비활성화 */
@@ -264,7 +280,7 @@ onMounted(async () => {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: $radius-s;
   font-size: 16px;
   cursor: pointer;
   transition: 0.25s;
